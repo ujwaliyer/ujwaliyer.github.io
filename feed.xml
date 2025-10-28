@@ -1,4 +1,200 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-10-29T00:05:36+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Hello World - My Journey from Developer to Architect to Product Manager in today’s age</title><link href="https://ujwaliyer.com/posts/hello-world-ujwal-iyer/" rel="alternate" type="text/html" title="Hello World - My Journey from Developer to Architect to Product Manager in today’s age" /><published>2025-10-28T00:00:00+05:30</published><updated>2025-10-28T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/hello-world-ujwal-iyer</id><content type="html" xml:base="https://ujwaliyer.com/posts/hello-world-ujwal-iyer/"><![CDATA[<h2 id="hello-there">Hello there!</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-10-29T00:12:54+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Ollama for Windows: How Local LLMs Finally Work - And What Product Managers Can Learn</title><link href="https://ujwaliyer.com/posts/Ollama/" rel="alternate" type="text/html" title="Ollama for Windows: How Local LLMs Finally Work - And What Product Managers Can Learn" /><published>2025-10-29T00:00:00+05:30</published><updated>2025-10-29T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/Ollama</id><content type="html" xml:base="https://ujwaliyer.com/posts/Ollama/"><![CDATA[<h1 id="ollama-for-windows-how-local-llms-finally-work---and-what-product-managers-can-learn">Ollama for Windows: How Local LLMs Finally Work - And What Product Managers Can Learn</h1>
+
+<p>When Ollama shipped native support for Windows in 2025, it wasn’t just another port.<br />
+It was the product equivalent of a breakthrough - transforming the complex world of open-weight LLMs into a single command-line experience that <em>just works</em>.</p>
+
+<p>This product teardown explores how Ollama for Windows works, the specific technical innovations that made it possible, and what product managers can take away from its execution.</p>
+
+<hr />
+
+<h2 id="1-why-this-launch-matters">1. Why This Launch Matters</h2>
+
+<p>Until recently, running a model like Llama 3 or Mistral locally on Windows meant long hours of driver installs, CUDA mismatches, and dependency chaos.<br />
+Ollama changed that by shipping a <strong>self-contained LLM runtime</strong> that requires no Docker, no Python, no setup.</p>
+
+<p>By extending that simplicity to Windows - still the world’s dominant OS for developers and enterprises - Ollama unlocked a massive new user base and, in doing so, quietly shifted the local AI landscape.</p>
+
+<hr />
+
+<h2 id="2-how-ollama-works-on-windows">2. How Ollama Works on Windows</h2>
+
+<h3 id="a-the-runtime-core---go--llamacpp"><strong>a. The Runtime Core - Go + llama.cpp</strong></h3>
+
+<ul>
+  <li>Ollama’s runtime is written in Go, not Python or Node.</li>
+  <li>Go compiles into static binaries, bundling everything required to run locally - no external dependencies.</li>
+  <li>Under the hood, Ollama uses llama.cpp, a highly optimized C++ engine that performs quantized inference directly on CPU or GPU.</li>
+</ul>
+
+<p>This combination lets users download a single <code class="language-plaintext highlighter-rouge">.exe</code> and start running models instantly - no environment setup, no path variables, no GPU driver hunting.</p>
+
+<p>Abstraction is adoption.
+ Reducing cognitive load isn’t just good UX - it’s a growth strategy.</p>
+
+<hr />
+
+<h3 id="b-gpu-acceleration---directml-backend"><strong>b. GPU Acceleration - DirectML Backend</strong></h3>
+
+<ul>
+  <li>On Windows, Ollama uses DirectML, Microsoft’s hardware-agnostic ML acceleration layer built on DirectX 12.</li>
+  <li>DirectML automatically detects available GPUs - NVIDIA, AMD, or Intel - and routes compute workloads accordingly.</li>
+  <li>If no compatible GPU exists, Ollama falls back gracefully to CPU inference.</li>
+</ul>
+
+<p><strong>Impact:</strong><br />
+Every modern Windows machine becomes a viable LLM host - even without CUDA.
+PM lesson: build for the majority, not the elite hardware subset.</p>
+
+<hr />
+
+<h3 id="c-unified-model-format---gguf"><strong>c. Unified Model Format - GGUF</strong></h3>
+
+<ul>
+  <li>Ollama standardized on GGUF, a binary format that bundles model weights, tokenizer data, and quantization metadata.</li>
+  <li>The format supports memory mapping (MMAP) - only required layers are loaded into memory.</li>
+  <li>This is especially critical for Windows’ NTFS, which has higher IO overhead.</li>
+</ul>
+
+<p>Result: faster model load times, smaller memory footprint, and cleaner portability.</p>
+
+<hr />
+
+<h3 id="d-local-openai-compatible-api-layer"><strong>d. Local OpenAI-Compatible API Layer</strong></h3>
+
+<p>One of Ollama’s smartest design moves lies in its API compatibility layer.<br />
+It exposes a local HTTP server at http://localhost:11434 that mirrors the OpenAI REST API, including the most widely used route:</p>
+
+<blockquote>
+  <p>POST /v1/chat/completions</p>
+</blockquote>
+
+<p>This endpoint behaves identically to OpenAI’s:</p>
+<ul>
+  <li>Accepts model, messages[] (roles: system, user, assistant), and standard parameters like temperature, max_tokens, and stream.</li>
+  <li>Streams tokens live via Server-Sent Events (SSE).</li>
+  <li>Returns OpenAI-compatible JSON responses - meaning tools like LangChain, LlamaIndex, Cursor, and n8n work out-of-the-box.</li>
+</ul>
+
+<p>It also supports:</p>
+<ul>
+  <li><code class="language-plaintext highlighter-rouge">/v1/completions</code> - for text-only generation</li>
+  <li><code class="language-plaintext highlighter-rouge">/v1/embeddings</code> - for RAG workflows</li>
+  <li><code class="language-plaintext highlighter-rouge">/api/generate</code> - Ollama’s original simple local route</li>
+</ul>
+
+<p>To switch any app from OpenAI to Ollama, simply change the base URL:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">export </span><span class="nv">OPENAI_API_BASE</span><span class="o">=</span><span class="s2">"http://localhost:11434/v1"</span>
+<span class="nb">export </span><span class="nv">OPENAI_API_KEY</span><span class="o">=</span><span class="s2">"ollama"</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Finally test locally:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre></td><td class="rouge-code"><pre>curl http://localhost:11434/v1/chat/completions <span class="se">\</span>
+  <span class="nt">-H</span> <span class="s2">"Content-Type: application/json"</span> <span class="se">\</span>
+  <span class="nt">-d</span> <span class="s1">'{
+    "model": "llama3",
+    "messages": [{"role": "user", "content": "Explain Ollama architecture"}]
+  }'</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<h2 id="3-setup-in-5-minutes">3. Setup in 5 Minutes</h2>
+
+<ol>
+  <li>Download Ollama for Windows → <a href="https://ollama.ai/download">ollama.ai/download</a></li>
+  <li>Run the installer - it adds itself to PATH.</li>
+  <li>Pull your model:</li>
+</ol>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>   ollama pull llama3
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ol>
+  <li>Run locally:
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>ollama run llama3
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+  <li>Integrate via API: Point your OpenAI-compatible tool to http://localhost:11434/v1. 
+Done. No Docker, no WSL, no Python virtualenvs.</li>
+</ol>
+
+<h2 id="4-key-takeaways-for-product-managers">4. Key Takeaways for Product Managers</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Theme</th>
+      <th>Insight</th>
+      <th>Example</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Reduce Friction</td>
+      <td>The simplest path to first success wins.</td>
+      <td>One-file install over multi-step setup.</td>
+    </tr>
+    <tr>
+      <td>Leverage Existing Standards</td>
+      <td>Extend, don’t reinvent.</td>
+      <td>Full <code class="language-plaintext highlighter-rouge">/v1/chat/completions</code> parity with OpenAI.</td>
+    </tr>
+    <tr>
+      <td>Build for the Majority</td>
+      <td>Focus on mass-market hardware.</td>
+      <td>DirectML for GPU abstraction across vendors.</td>
+    </tr>
+    <tr>
+      <td>Prioritize Reliability</td>
+      <td>Graceful fallbacks earn user trust.</td>
+      <td>Auto-switch to CPU when GPU unavailable.</td>
+    </tr>
+    <tr>
+      <td>Ecosystem Thinking</td>
+      <td>APIs create flywheels.</td>
+      <td>Works natively with LangChain, Cursor, n8n.</td>
+    </tr>
+    <tr>
+      <td>Invisible Architecture</td>
+      <td>Hide complexity behind defaults.</td>
+      <td>GGUF model format with MMAP.</td>
+    </tr>
+    <tr>
+      <td>Empathy as Strategy</td>
+      <td>Developers don’t want power - they want flow.</td>
+      <td>“It just works” is the true retention loop.</td>
+    </tr>
+  </tbody>
+</table>
+
+<blockquote>
+  <p>Adoption isn’t driven by novelty - it’s driven by effort reduction.</p>
+</blockquote>
+
+<h2 id="5-final-thoughts">5. Final Thoughts</h2>
+<p>Ollama for Windows is a rare example where technical depth meets empathetic design.
+It redefined “local AI” from being an expert-only experiment to a mass-developer reality.</p>
+
+<p>By blending:</p>
+<ul>
+  <li>Go’s portability</li>
+  <li>DirectML’s universality</li>
+  <li>GGUF’s simplicity</li>
+  <li>OpenAI API compatibility</li>
+</ul>
+
+<blockquote>
+  <p>Ollama didn’t just ship a Windows binary - it shipped a platform thesis: local, private, interoperable AI for everyone.</p>
+</blockquote>]]></content><author><name>Ujwal Iyer</name></author><category term="AI" /><category term="LLM" /><category term="Product Management" /><category term="Ollama" /><category term="Windows" /><category term="DirectML" /><category term="Local AI" /><category term="OpenAI API" /><summary type="html"><![CDATA[A deep teardown of Ollama for Windows - how it made local LLMs simple, what powers it under the hood, and what product managers can learn from its design and strategy.]]></summary></entry><entry><title type="html">Hello World - My Journey from Developer to Architect to Product Manager in today’s age</title><link href="https://ujwaliyer.com/posts/hello-world-ujwal-iyer/" rel="alternate" type="text/html" title="Hello World - My Journey from Developer to Architect to Product Manager in today’s age" /><published>2025-10-28T00:00:00+05:30</published><updated>2025-10-28T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/hello-world-ujwal-iyer</id><content type="html" xml:base="https://ujwaliyer.com/posts/hello-world-ujwal-iyer/"><![CDATA[<h2 id="hello-there">Hello there!</h2>
 
 <p>I’m <strong>Ujwal Iyer</strong>, a Senior Product Manager at SAP Labs, Bangalore, where I help design and scale products that reduce onboarding time and accelerate adoption.</p>
 
