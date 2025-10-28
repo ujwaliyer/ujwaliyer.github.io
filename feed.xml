@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-10-29T00:05:36+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Hello World - My Journey from Developer to Architect to Product Manager in today’s age</title><link href="https://ujwaliyer.com/posts/hello-world-ujwal-iyer/" rel="alternate" type="text/html" title="Hello World - My Journey from Developer to Architect to Product Manager in today’s age" /><published>2025-10-28T00:00:00+05:30</published><updated>2025-10-28T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/hello-world-ujwal-iyer</id><content type="html" xml:base="https://ujwaliyer.com/posts/hello-world-ujwal-iyer/"><![CDATA[<h2 id="hello-there">Hello there!</h2>
+
+<p>I’m <strong>Ujwal Iyer</strong>, a Senior Product Manager at SAP Labs, Bangalore, where I help design and scale products that reduce onboarding time and accelerate adoption.</p>
+
+<p>Before I moved into product management, I spent years as a developer and solution architect, writing C#, building systems on Azure and AWS, and designing secure, scalable architectures for enterprise customers. That experience gave me a builder’s mindset - something I still rely on every day as a PM.</p>
+
+<p>Today, I work at the intersection of AI, automation, and product strategy, shaping how businesses experience value from SAP’s cloud ecosystem.</p>
+
+<hr />
+
+<h2 id="from-developer-to-product-management">From Developer to Product Management</h2>
+
+<ul>
+  <li><strong>Developer roots</strong> - I began my career as a software engineer writing C# and .NET code, obsessed with performance, design patterns- creating trading apps, and multi-player games using Microsoft Kinect SDK and Microsoft PixelSense.</li>
+  <li><strong>Architect years</strong> - Over time, I grew into a Cloud Solution Architect, designing hybrid solutions on Azure, AWS, and SAP BTP, and became a Microsoft Certified Azure Solutions Architect Expert and SAP Certified BTP Solution Architect.</li>
+  <li><strong>Product management</strong> - For the last six years at SAP Labs India, I’ve led platform product with enterprise kubernetes SAP Gardener, data management solutions with SAP Data Intelligence, and at present building a greenfield SaaS platform that transforms customer onboarding from a months-long process into a guided, self-service experience.</li>
+  <li><strong>Product philosophy</strong> - My focus is on blending strong technical foundations with product vision - ensuring that “how we build” never loses sight of “why we build.”</li>
+</ul>
+
+<hr />
+
+<h2 id="what-youll-find-here">What You’ll Find Here</h2>
+
+<p>This blog isn’t about buzzwords or corporate updates - it’s my <strong>personal lab notebook</strong>.<br />
+A space to share hands-on projects, product insights, and the messy middle between technology and strategy.</p>
+
+<p>Each post will blend <strong>architecture, PM thinking, code experiments, and AI</strong> - written for product people who like to get their hands dirty. I believe there is no greater retention in learning than by building something: from idea to outcomes.</p>
+
+<hr />
+
+<h2 id="why-i-started-this-blog">Why I Started This Blog</h2>
+
+<p>We’re entering a decade where <strong>product managers can’t just “talk tech” - they need to build with it</strong>.  The ability to combine design, data, automation, platform, and architecture thinking will define the next generation of PMs.</p>
+
+<p>This blog is my way of staying hands-on - to keep learning, to share what works (and what doesn’t), and to build a public record of experiments at the frontier of AI and product design.</p>
+
+<hr />
+
+<h2 id="outside-work">Outside Work</h2>
+
+<p>When I’m not experimenting with AI workflows or writing about platforms, I’m:</p>
+<ul>
+  <li>building small learning projects with my 5-year-old son,</li>
+  <li>reading and discussing <strong>Ramayana and Mahabharata</strong>,</li>
+  <li>or helping my wife <strong>Gayathri</strong>, an urban designer, in her work on sustainable city projects across India.</li>
+</ul>
+
+<p>That balance between <strong>technology, learning, and purpose</strong> is what keeps me curious.</p>
+
+<hr />
+
+<h2 id="how-this-site-runs">How This Site Runs</h2>
+
+<p>This blog is powered by <strong>Jekyll + Chirpy theme</strong>, hosted on <strong>GitHub Pages</strong>, and connected to my custom domain <a href="https://ujwaliyer.com"><strong>ujwaliyer.com</strong></a>.<br />
+Everything here - from AI prototypes to product frameworks - is meant to be open, transparent, and reusable.</p>
+
+<hr />
+
+<p><strong>Thanks for stopping by.</strong><br />
+If you’re working on something interesting or just want to swap ideas, reach me at <strong><a href="mailto:ujwaliyer@live.com">ujwaliyer@live.com</a></strong>.<br />
+Let’s learn, build, and ship better products - together.</p>
+
+<hr />
+
+<p><em>– Ujwal Iyer</em><br />
+Senior Product Manager | SAP Labs India<br />
+<a href="https://ujwaliyer.com">https://ujwaliyer.com</a></p>]]></content><author><name></name></author><category term="Product Management" /><category term="AI" /><category term="Cloud" /><category term="SAP BTP" /><category term="Azure" /><category term="AWS" /><category term="Learning" /><category term="Career" /><summary type="html"><![CDATA[I’m Ujwal Iyer - Senior Product Manager at SAP Labs India, combining deep technical roots in C#, cloud architecture, and SAP BTP with a passion for building impactful products.]]></summary></entry></feed>
