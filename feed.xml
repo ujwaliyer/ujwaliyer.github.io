@@ -1,4 +1,300 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-10-29T00:22:22+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Ollama for Windows: How Local LLMs Finally Work - And What Product Managers Can Learn</title><link href="https://ujwaliyer.com/posts/Ollama/" rel="alternate" type="text/html" title="Ollama for Windows: How Local LLMs Finally Work - And What Product Managers Can Learn" /><published>2025-10-29T00:00:00+05:30</published><updated>2025-10-29T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/Ollama</id><content type="html" xml:base="https://ujwaliyer.com/posts/Ollama/"><![CDATA[<p>When Ollama shipped native support for Windows in 2025, it wasn’t just another port. It was the product equivalent of a breakthrough - transforming the complex world of open-weight LLMs into a single command-line experience that <em>just works</em>.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-10-31T17:47:07+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption</title><link href="https://ujwaliyer.com/posts/AI-For-Kids/" rel="alternate" type="text/html" title="Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption" /><published>2025-10-31T00:00:00+05:30</published><updated>2025-10-31T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/AI-For-Kids</id><content type="html" xml:base="https://ujwaliyer.com/posts/AI-For-Kids/"><![CDATA[<h1 id="building-ai-for-my-5-year-old-designing-curiosity-not-consumption">Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption</h1>
+
+<p>My 5-year-old is obsessed with questions.<br />
+Not the “what’s two plus two” kind - but the ones that stop you mid-scroll.</p>
+<blockquote>
+  <p>“Why can’t we see air?” “Why is Hanuman red?” “Why does a gas flame burn blue, not orange like a matchstick?”</p>
+</blockquote>
+
+<p>Half my evenings are spent switching between ChatGPT tabs and bedtime stories. It made me wonder - if AI can answer my product strategy questions at work, why can’t it nurture his curiosity too?</p>
+
+<p>That’s when it hit me: <em>we build AI to make adults efficient; maybe it’s time I build an AI to make kids wonder.</em></p>
+
+<hr />
+
+<h2 id="1-the-curiosity-persona-understanding-a-5-year-old-user">1. The “Curiosity Persona”: Understanding a 5-Year-Old User</h2>
+
+<p>Before jumping into tools or frameworks, I did what any PM would do - built a persona.<br />
+Not a B2B buyer or an enterprise admin, but a <strong>Curious Explorer aged five</strong>.</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Attribute</th>
+      <th>Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>Name</strong></td>
+      <td>5 yr old curious toddler</td>
+    </tr>
+    <tr>
+      <td><strong>Motivation</strong></td>
+      <td>Understand the world through stories, voices, and patterns</td>
+    </tr>
+    <tr>
+      <td><strong>Preferred Interface</strong></td>
+      <td>Voice, facial cues, sound effects, short narratives</td>
+    </tr>
+    <tr>
+      <td><strong>Attention Span</strong></td>
+      <td>2–3 minutes max per topic</td>
+    </tr>
+    <tr>
+      <td><strong>Cognitive Model</strong></td>
+      <td>Relates abstract ideas to known visuals (Hanuman = strength, fire = energy)</td>
+    </tr>
+    <tr>
+      <td><strong>Parental Expectation</strong></td>
+      <td>Safe, screen-free, emotionally aware experience</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="2-jobs-to-be-done-for-the-toddler">2. Jobs-To-Be-Done for the Toddler</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Job</th>
+      <th>Current Solution</th>
+      <th>Pain (1–5)</th>
+      <th>Gain if Solved (1–5)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Get answers to big “why” questions</td>
+      <td>Parents or YouTube Kids</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Listen to Itihasa (Ramayana, Mahabharata) stories with meaning</td>
+      <td>Parents reading books</td>
+      <td>2</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Explore science through daily life</td>
+      <td>Random videos or books</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Feel heard when asking many questions</td>
+      <td>Adults often tired or busy</td>
+      <td>5</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>So the core <strong>Job to Be Done</strong> is:</p>
+<blockquote>
+  <p>“Help me explore my world through conversation - not content.”</p>
+</blockquote>
+
+<hr />
+
+<h2 id="3-designing-for-zero-screen-time">3. Designing for Zero Screen Time</h2>
+
+<p>Here’s where most AI tools fail children - they assume visual attention.<br />
+But for a 5-year-old, <strong>eyes are for imagination, not interfaces</strong>.</p>
+
+<p>So, the system must rely purely on <strong>voice + presence</strong>.</p>
+
+<ul>
+  <li><strong>Wake word model:</strong> “Hey Rama, can you tell me about rainbows?”</li>
+  <li><strong>TTS engine:</strong> A friendly Indian-accented voice that blends warmth and curiosity.</li>
+  <li><strong>Sound design:</strong> Each response ends with a short hum, like a “thinking” pause - helping the child know it’s listening.</li>
+  <li><strong>Emotional pacing:</strong> Limit answers to 2–3 sentences. End with a “What do you think?” to spark dialogue.</li>
+</ul>
+
+<p>This isn’t a chatbot; I will try to design it like a <strong>co-explorer</strong>.</p>
+
+<hr />
+
+<h2 id="4-safety-architecture-how-to-make-ai-safe-for-kids">4. Safety Architecture: How to Make AI Safe for Kids</h2>
+
+<p>Building for kids isn’t just about “PG-rated” data. It’s about emotional safety and cognitive scaffolding.</p>
+
+<h3 id="a-guardrails">a. <strong>Guardrails</strong></h3>
+<ul>
+  <li>Use a <strong>local LLM (like Llama 3.1 GGUF)</strong> fine-tuned on pre-vetted content - no open internet access.</li>
+  <li>Curate a <strong>knowledge corpus</strong>: Children’s encyclopedia, Amar Chitra Katha, ISRO science explainers, mythology retellings.</li>
+  <li>Analyze retrievals from RAG and filter out words/meanings which are not toddler friendly</li>
+</ul>
+
+<h3 id="b-ethical-filters">b. <strong>Ethical Filters</strong></h3>
+<ul>
+  <li>Reinforce the phrase “I don’t know” gracefully. For example:
+    <blockquote>
+      <p>“That’s a deep question. Maybe we can learn that together tomorrow!”</p>
+    </blockquote>
+  </li>
+  <li>Keep tone consistently empathetic, never corrective.</li>
+</ul>
+
+<h3 id="c-parent-mode">c. <strong>Parent Mode</strong></h3>
+<ul>
+  <li>Mobile dashboard for parents to view:
+    <ul>
+      <li>Topics explored</li>
+      <li>Follow-up questions</li>
+      <li>Curiosity trends (what’s peaking this week: “fire,” “planets,” or “Hanuman”)</li>
+    </ul>
+  </li>
+</ul>
+
+<hr />
+
+<h2 id="5-mvp-scope-a-safe-ai-story-companion">5. MVP Scope: A Safe AI Story Companion</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Feature</th>
+      <th>Description</th>
+      <th>PM Lens</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Voice activation</td>
+      <td>“Hey Mitra!” trigger using Whisper or Porcupine</td>
+      <td>Accessibility</td>
+    </tr>
+    <tr>
+      <td>Story modules</td>
+      <td>Ramayana, Mahabharata, ISRO discoveries, nature sounds</td>
+      <td>Engagement</td>
+    </tr>
+    <tr>
+      <td>Question answering</td>
+      <td>Short conversational responses via Llama.cpp</td>
+      <td>Core value</td>
+    </tr>
+    <tr>
+      <td>Parent dashboard</td>
+      <td>Topic analytics via n8n workflow</td>
+      <td>Transparency</td>
+    </tr>
+    <tr>
+      <td>Offline mode</td>
+      <td>Runs locally on Raspberry Pi</td>
+      <td>Safety-first</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>North Star Metric:</strong></p>
+<blockquote>
+  <p>“Minutes of meaningful conversation per day (vs passive screen time).”</p>
+</blockquote>
+
+<p><strong>Guardrails:</strong></p>
+<ul>
+  <li>Session &lt;10 min per hour</li>
+  <li>100% offline safety compliance</li>
+</ul>
+
+<p><strong>Retention goal:</strong><br />
+80% weekly usage consistency by the child (measured via parent logs).</p>
+
+<hr />
+
+<h2 id="6-the-delight-loop">6. The Delight Loop</h2>
+
+<p>The delight moment isn’t when it answers correctly.<br />
+It’s when it <strong>asks back</strong>.</p>
+
+<blockquote>
+  <p>“Do you think Hanuman could jump because he was light like air or strong like wind?”</p>
+</blockquote>
+
+<p>That’s when a child pauses, <em>thinks</em>, and smiles. That’s engagement, not addiction.</p>
+
+<p>That moment becomes viral - not on social media, but across living rooms. Parents talk. Builders notice. And the loop grows.</p>
+
+<hr />
+
+<h2 id="7-my-learning-journey-as-a-product-manager">7. My Learning Journey as a Product Manager</h2>
+
+<p>This project isn’t just for my son - it’s a sandbox for <strong>me</strong> as a product manager.</p>
+
+<p>I’ll be learning AI by <strong>building it hands-on</strong>, using a Raspberry Pi 5 (16GB) as the playground.<br />
+Here’s what I plan to implement and learn through this:</p>
+
+<ul>
+  <li><strong>LLM integration:</strong> Running local inference with Llama 3.1 GGUF models.</li>
+  <li><strong>Agentic frameworks:</strong> Building multi-agent orchestration using <strong>LangChain</strong> and <strong>LangGraph</strong>.</li>
+  <li><strong>Hierarchical RAG (Retrieval-Augmented Generation):</strong> Organizing mythology, science, and nature stories in topic layers.</li>
+  <li><strong>Text-to-Speech (TTS):</strong> Crafting emotionally warm, kid-friendly voice synthesis.</li>
+  <li><strong>Speech-to-Text (STT):</strong> Capturing natural child speech and simplifying intent parsing.</li>
+  <li><strong>Safety and moderation layer:</strong> Filtering and transforming responses for age-appropriateness.</li>
+  <li><strong>Edge deployment:</strong> Running everything locally for privacy and offline reliability.</li>
+  <li><strong>Voice UX testing:</strong> Observing how a child’s curiosity shapes the LLM feedback loop.</li>
+</ul>
+
+<p>So there are really <strong>three happy personas</strong> in this journey:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Persona</th>
+      <th>Motivation</th>
+      <th>Outcome</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>The Dad</strong></td>
+      <td>Sees his child delighted by learning through curiosity, not screens</td>
+      <td>Pride and purpose</td>
+    </tr>
+    <tr>
+      <td><strong>The Product Manager</strong></td>
+      <td>Learns AI deeply by building, debugging, and iterating - not consuming theory</td>
+      <td>Real mastery</td>
+    </tr>
+    <tr>
+      <td><strong>The Child</strong></td>
+      <td>Gets the power of an LLM through his own voice and imagination</td>
+      <td>Joy and agency</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="8-product-managers-reflection">8. Product Manager’s Reflection</h2>
+
+<p>This project taught me something no user research could - <strong>curiosity is the most underrated product metric</strong>.</p>
+
+<p>In building this, I’m not launching another “AI for kids” app. I’m <strong>redesigning how curiosity scales safely</strong> in the age of LLMs.  If this works, I’ll have built not just a learning companion for my child - but a blueprint for how AI can grow <em>with</em> us, not <em>over</em> us.*</p>
+
+<hr />
+
+<h2 id="9-whats-next">9. What’s Next</h2>
+
+<p>I’m building this project <strong>from scratch</strong> - hardware, data pipeline, orchestration, tools, and voice UX.<br />
+The goal is simple:</p>
+<blockquote>
+  <p>To make curiosity the most natural interface between a child and AI.</p>
+</blockquote>
+
+<p>Watch this space - I’ll be sharing each milestone as I build the <strong>Kid-Safe AI Companion</strong> on Raspberry Pi 5.</p>
+
+<p>The next post in this series will cover:  Setup of Raspberry Pi 5</p>
+
+<hr />
+
+<p><em>- Ujwal Iyer</em><br />
+<em>Senior Product Manager | SAP Labs | Builder &amp; Dad | Learning AI by Doing</em></p>]]></content><author><name></name></author><category term="AI" /><category term="Parenting" /><category term="Product Management" /><category term="AI for kids" /><category term="LLM" /><category term="voice interface" /><category term="product management" /><category term="curiosity" /><category term="Raspberry Pi" /><category term="LangChain" /><category term="LangGraph" /><category term="RAG" /><summary type="html"><![CDATA[How a Dad, who's a Product Manager is learning AI hands-on by building a safe, voice-only LLM companion for his child - blending parenting, product thinking, and technology.]]></summary><media:thumbnail xmlns:media="http://search.yahoo.com/mrss/" url="https://ujwaliyer.com/assets/img/ai-kid-curiosity.png" /><media:content medium="image" url="https://ujwaliyer.com/assets/img/ai-kid-curiosity.png" xmlns:media="http://search.yahoo.com/mrss/" /></entry><entry><title type="html">Ollama for Windows: How Local LLMs Finally Work - And What Product Managers Can Learn</title><link href="https://ujwaliyer.com/posts/Ollama/" rel="alternate" type="text/html" title="Ollama for Windows: How Local LLMs Finally Work - And What Product Managers Can Learn" /><published>2025-10-29T00:00:00+05:30</published><updated>2025-10-29T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/Ollama</id><content type="html" xml:base="https://ujwaliyer.com/posts/Ollama/"><![CDATA[<p>When Ollama shipped native support for Windows in 2025, it wasn’t just another port. It was the product equivalent of a breakthrough - transforming the complex world of open-weight LLMs into a single command-line experience that <em>just works</em>.</p>
 
 <p>This product teardown explores how Ollama for Windows works, the specific technical innovations that made it possible, and what product managers can take away from its execution.</p>
 
