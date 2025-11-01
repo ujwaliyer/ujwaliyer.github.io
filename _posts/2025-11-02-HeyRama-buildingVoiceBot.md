@@ -1,6 +1,8 @@
 ---
 title: "Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5"
-date: 2025-11-02
+date: 2025-11-02 00:00:00 +530
+layout: post
+published: true
 categories: [AI Projects, Raspberry Pi, LLM, Offline AI, Education, Product Management]
 tags: [Raspberry Pi, Ollama, Qdrant, LangChain, Whisper, Piper, RAG, Edge AI, Product Thinking]
 description: "A complete roadmap and offline AI framework guide to build 'Hey Rama' - a private, voice-based learning system for children using Raspberry Pi 5, Ollama, Qdrant, and LangChain."
