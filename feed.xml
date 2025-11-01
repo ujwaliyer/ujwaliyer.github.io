@@ -1,4 +1,287 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-01T23:52:03+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption</title><link href="https://ujwaliyer.com/posts/AI-For-Kids/" rel="alternate" type="text/html" title="Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption" /><published>2025-10-31T00:00:00+05:30</published><updated>2025-10-31T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/AI-For-Kids</id><content type="html" xml:base="https://ujwaliyer.com/posts/AI-For-Kids/"><![CDATA[<h1 id="building-ai-for-my-5-year-old-designing-curiosity-not-consumption">Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption</h1>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-02T00:18:35+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5</title><link href="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/" rel="alternate" type="text/html" title="Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5" /><published>2025-11-02T00:00:00+05:30</published><updated>2025-11-02T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot</id><content type="html" xml:base="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/"><![CDATA[<h2 id="vision">Vision</h2>
+
+<ul>
+  <li><strong>Hey Rama</strong> is a voice-first, completely offline learning system built on Raspberry Pi 5 (16 GB).</li>
+  <li>It teaches a child topics like Ramayana, Mahabharata, Maths, Logic, Nature, Space, and Storytelling using a local Large Language Model (LLM), speech recognition, and agentic reasoning.</li>
+  <li>The project helps a child explore knowledge safely, while giving a product manager like myself- a hands-on builder experience with <strong>real-world AI orchestration</strong>.</li>
+</ul>
+
+<p><img src="/assets/img/Hey-Rama.jpg" alt="" /></p>
+
+<h2 id="feature-roadmap-and-user-stories">Feature Roadmap and User Stories</h2>
+
+<p>Each feature is ordered for incremental build-out with clear objectives and finalized tool references.</p>
+
+<h3 id="1-system-setup-and-environment">1. System Setup and Environment</h3>
+<ul>
+  <li>Objective: Prepare a stable, secure platform for offline AI workloads.</li>
+  <li>Technologies: Raspberry Pi OS 64-bit, Linux, Python, Docker</li>
+</ul>
+
+<p>User Stories</p>
+<ol>
+  <li>Prepare boot media, power supply, and cooling.</li>
+  <li>Install Raspberry Pi OS (Bookworm 64-bit).</li>
+  <li>Configure static IP, SSH, and firewall (UFW).</li>
+  <li>Create <code class="language-plaintext highlighter-rouge">/data</code> directories for models, corpus, and logs.</li>
+  <li>Validate system health under load.</li>
+</ol>
+
+<hr />
+
+<h3 id="2-llm-runtime-setup">2. LLM Runtime Setup</h3>
+<ul>
+  <li>Objective: Enable local LLM inference through Ollama.</li>
+  <li>Technologies: Ollama, GGUF 7B (Llama 3.1 or Mistral), systemd</li>
+</ul>
+
+<p>User Stories</p>
+<ol>
+  <li>Install Ollama service.</li>
+  <li>Pull 7B instruction-tuned model (quantized q5_k_m).</li>
+  <li>Add smaller fallback model (3B) for quick responses.</li>
+  <li>Verify response times &lt;8 seconds.</li>
+</ol>
+
+<hr />
+
+<h3 id="3-knowledge-base-and-rag-pipeline">3. Knowledge Base and RAG Pipeline</h3>
+<ul>
+  <li>Objective: Build an offline retriever for factual and narrative content.</li>
+  <li>Technologies: Qdrant, Sentence Transformers, Python</li>
+</ul>
+
+<p>User Stories</p>
+<ol>
+  <li>Install Qdrant vector database.</li>
+  <li>Create collections for each topic: Ramayana, Mahabharata, Maths, Logic, Stories, Nature, Space.</li>
+  <li>Use local embeddings (<code class="language-plaintext highlighter-rouge">all-MiniLM-L6-v2</code>).</li>
+  <li>Ingest chunked, tagged content into Qdrant.</li>
+  <li>Validate retrieval accuracy, switch to hybrid heirarchical RAG is accuracy is low.</li>
+</ol>
+
+<hr />
+
+<h3 id="4-voice-input-and-output">4. Voice Input and Output</h3>
+<ul>
+  <li>Objective: Enable hands-free, real-time interaction.</li>
+  <li>Technologies: openWakeWord, Whisper.cpp, Piper</li>
+</ul>
+
+<p>User Stories</p>
+<ol>
+  <li>Calibrate microphone input.</li>
+  <li>Implement Whisper.cpp for offline STT.</li>
+  <li>Add wake word “Hey Rama” detection.</li>
+  <li>Configure Piper for offline child-friendly TTS.</li>
+  <li>Test full speech loop with &lt;2s total latency.</li>
+</ol>
+
+<hr />
+
+<h3 id="5-orchestration-and-agent-flow">5. Orchestration and Agent Flow</h3>
+<ul>
+  <li>Objective: Build dynamic flow between input, reasoning, and output.</li>
+  <li>Technologies: LangChain (local), REST APIs, JSON flows</li>
+</ul>
+
+<p>User Stories</p>
+<ol>
+  <li>LangChain local orchestration.</li>
+  <li>Create retrieval-augmented QA chain (RAG).</li>
+  <li>Add context memory for smoother multi-turn answers.</li>
+  <li>Map intents: storytelling, quiz, knowledge, logic.</li>
+  <li>Validate full pipeline: wake → STT → retrieve → LLM → TTS.</li>
+</ol>
+
+<hr />
+
+<h3 id="6-topic-specific-agents">6. Topic-Specific Agents</h3>
+<ul>
+  <li>Objective: Make “Hey Rama” intelligent across multiple learning domains.</li>
+  <li>Technologies: LangChain, Qdrant, Ollama</li>
+</ul>
+
+<p>User Stories</p>
+<ol>
+  <li>Story Agent - narrates moral and mythological stories.</li>
+  <li>Quiz Agent - asks short questions and explains answers.</li>
+  <li>Knowledge Agent - answers “why” and “how” questions.</li>
+  <li>Each agent retrieves from its domain-specific Qdrant collection.</li>
+  <li>Test tone consistency for age 5–8.</li>
+</ol>
+
+<hr />
+
+<h3 id="7-safety-and-governance">7. Safety and Governance</h3>
+<p>Objective: Keep the system factual, respectful, and child-safe.<br />
+Technologies: Guardrails AI (offline), local logging</p>
+
+<p>User Stories</p>
+<ol>
+  <li>Apply Guardrails filters on responses for tone and safety.</li>
+  <li>Add parental control (time limits and topic access).</li>
+  <li>Log all interactions for transparency.</li>
+  <li>Validate safe outputs.</li>
+</ol>
+
+<hr />
+
+<h3 id="8-monitoring-and-maintenance">8. Monitoring and Maintenance</h3>
+<p>Objective: Ensure reliability and observability.<br />
+Technologies: systemd, journalctl, Glances</p>
+
+<p>User Stories:</p>
+<ol>
+  <li>Create systemd units for each service (Ollama, Qdrant, STT, TTS).</li>
+  <li>Set up health checks and daily restarts.</li>
+  <li>Log CPU/RAM usage and conversation stats.</li>
+  <li>Add alerts for service failure.</li>
+</ol>
+
+<hr />
+
+<h3 id="9-testing-and-demos">9. Testing and Demos</h3>
+<p>Objective: Validate real-life usage.</p>
+
+<p>Sample Scenarios</p>
+<ol>
+  <li>“Hey Rama, tell me about Hanuman.”</li>
+  <li>“Quiz me on addition up to ten.”</li>
+  <li>“Read a story about animals found in Africa.”</li>
+  <li>“Why is the sky blue?”</li>
+</ol>
+
+<p>Each should complete end-to-end locally, with clear voice and no external connections.</p>
+
+<hr />
+
+<h2 id="ai--agentic-frameworks-planned-for-implementation">AI &amp; Agentic Frameworks Planned for Implementation</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Framework</th>
+      <th>Purpose</th>
+      <th>Key Learning</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LangChain (Local)</strong></td>
+      <td>Agent orchestration between Ollama and Qdrant</td>
+      <td>Chains, retrieval, reasoning</td>
+    </tr>
+    <tr>
+      <td><strong>RAGAS</strong></td>
+      <td>Evaluate retrieval accuracy and relevance</td>
+      <td>RAG metrics, quality scoring</td>
+    </tr>
+    <tr>
+      <td><strong>Whisper.cpp</strong></td>
+      <td>Offline speech-to-text</td>
+      <td>Real-time STT optimization</td>
+    </tr>
+    <tr>
+      <td><strong>Piper</strong></td>
+      <td>Offline text-to-speech</td>
+      <td>Voice synthesis tuning</td>
+    </tr>
+    <tr>
+      <td><strong>MemGPT</strong></td>
+      <td>Add persistent memory to sessions</td>
+      <td>Conversation recall, personalization</td>
+    </tr>
+    <tr>
+      <td><strong>Guardrails AI (Offline Mode)</strong></td>
+      <td>Enforce tone and safety</td>
+      <td>Response filtering, schema validation</td>
+    </tr>
+    <tr>
+      <td><strong>TruLens (Offline Eval)</strong></td>
+      <td>Evaluate model helpfulness</td>
+      <td>Trace and assess reasoning quality</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="learning-areas">Learning Areas</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Area</th>
+      <th>What to Learn?</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><strong>LLM Orchestration</strong></td>
+      <td>LangChain chains, context flow, structured prompts</td>
+    </tr>
+    <tr>
+      <td><strong>Retrieval Evaluation</strong></td>
+      <td>RAGAS, groundedness, recall precision</td>
+    </tr>
+    <tr>
+      <td><strong>Conversational Memory</strong></td>
+      <td>MemGPT local context persistence</td>
+    </tr>
+    <tr>
+      <td><strong>Voice UX</strong></td>
+      <td>Whisper.cpp latency tuning, Piper tone optimization</td>
+    </tr>
+    <tr>
+      <td><strong>AI Safety</strong></td>
+      <td>Guardrails rule definition and validation</td>
+    </tr>
+    <tr>
+      <td><strong>Agent Evaluation</strong></td>
+      <td>TruLens metrics and improvement loop</td>
+    </tr>
+    <tr>
+      <td><strong>System Thinking</strong></td>
+      <td>Offline-first architecture, reliability design</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+<h2 id="a-product-managers-perspective">A Product Manager’s Perspective</h2>
+
+<ul>
+  <li>After over 6 yrs in product management, this project reminded me of what originally drew me to technology- the joy of <strong>building something useful from first principles</strong>.</li>
+  <li>“Hey Rama” isn’t just an AI experiment; it became a full product lifecycle in miniature - discovery, design, development, validation, and iteration - all compressed into a single, tangible artifact.</li>
+  <li>Every component decision - Ollama for edge inference, Qdrant for retrieval, LangChain for orchestration, Whisper and Piper for voice - mirrors the same trade-offs faced in enterprise-scale products: performance vs. usability, innovation vs. reliability, and ambition vs. maintainability.</li>
+</ul>
+
+<p>From a PM’s lens, it represents five core learnings:</p>
+
+<ol>
+  <li><strong>Start with a clear outcome</strong> - “delight the user” here meant delighting my 5-year-old curious son.</li>
+  <li><strong>Design with constraints, not despite them</strong> - a 16GB Raspberry Pi forces thoughtful scoping. If you have a 4/8GB one, entire design needs to be mapped out from scratch.</li>
+  <li><strong>Prioritize modularity</strong> - each addition (LangChain, MemGPT, RAGAS) had to earn its place.</li>
+  <li><strong>Measure value, not volume</strong> - small, observable wins (a faster answer, a more accurate story) trump over-engineered complexity.</li>
+  <li><strong>Close the feedback loop</strong> - real-world testing with a curious child is better than any synthetic evaluation metric.</li>
+</ol>
+
+<p>In essence, this project bridges <strong>AI system design</strong> and <strong>human-centered product thinking</strong>. It demonstrates that being “AI-ready” as a product manager isn’t about memorizing frameworks- it’s about <strong>understanding the why</strong> behind each layer of intelligence you introduce.</p>
+
+<p>It’s the same muscle we use in large organizations, just exercised in a sandbox of pure creativity.</p>
+
+<h2 id="a-fathers-perspective">A Father’s Perspective</h2>
+
+<p>As a father, “Hey Rama” became something deeper - a bridge between my world of technology and my child’s world of imagination.</p>
+
+<p>I am waiting for the day when my 5-year-old says <em>“Hey Rama, tell me about Hanuman”</em> and hearing a gentle, local voice respond- without screens, ads, or distractions - will sure be pretty satisfying!</p>
+
+<p>Every late-night debugging session would be worth it, because it wasn’t just about code or AI- It was about <strong>showing my child what curiosity looks like in action</strong> - and how we can build our own tools instead of consuming someone else’s.</p>
+
+<hr />
+
+<p><em>© 2025 Ujwal Iyer - Reflections of a father and a PM who is learning AI by building, not by watching youtube videos and reels :-).</em></p>]]></content><author><name></name></author><category term="AI Projects" /><category term="Raspberry Pi" /><category term="LLM" /><category term="Offline AI" /><category term="Education" /><category term="Product Management" /><category term="Raspberry Pi" /><category term="Ollama" /><category term="Qdrant" /><category term="LangChain" /><category term="Whisper" /><category term="Piper" /><category term="RAG" /><category term="Edge AI" /><category term="Product Thinking" /><summary type="html"><![CDATA[A complete roadmap and offline AI framework guide to build 'Hey Rama' - a private, voice-based learning system for children using Raspberry Pi 5, Ollama, Qdrant, and LangChain.]]></summary></entry><entry><title type="html">Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption</title><link href="https://ujwaliyer.com/posts/AI-For-Kids/" rel="alternate" type="text/html" title="Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption" /><published>2025-10-31T00:00:00+05:30</published><updated>2025-10-31T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/AI-For-Kids</id><content type="html" xml:base="https://ujwaliyer.com/posts/AI-For-Kids/"><![CDATA[<h1 id="building-ai-for-my-5-year-old-designing-curiosity-not-consumption">Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption</h1>
 
 <p>My 5-year-old is obsessed with questions.<br />
 Not the “what’s two plus two” kind - but the ones that stop you mid-scroll.</p>
