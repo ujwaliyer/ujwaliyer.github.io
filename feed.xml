@@ -1,4 +1,134 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-02T00:52:08+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5</title><link href="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/" rel="alternate" type="text/html" title="Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5" /><published>2025-11-02T00:00:00+05:30</published><updated>2025-11-02T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot</id><content type="html" xml:base="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/"><![CDATA[<h2 id="vision">Vision</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-04T17:53:27+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Setup Raspberry Pi 5 16GB from scratch</title><link href="https://ujwaliyer.com/posts/RaspberryPi-Setup/" rel="alternate" type="text/html" title="Setup Raspberry Pi 5 16GB from scratch" /><published>2025-11-04T00:00:00+05:30</published><updated>2025-11-04T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/RaspberryPi-Setup</id><content type="html" xml:base="https://ujwaliyer.com/posts/RaspberryPi-Setup/"><![CDATA[<h2 id="1-os-setup">1. OS Setup</h2>
+
+<ul>
+  <li>Setup Raspberry Pi OS 64-bit (Bookworm) → best for GPIO/camera + easiest device support.</li>
+  <li>Download Raspberry Pi Imager from https://www.raspberrypi.com/software/</li>
+  <li>Install it on your computer (Windows, macOS, or Linux)</li>
+  <li>Select Raspberry Pi official OS 64-bit, the SD-card to flash, and the actual device bought</li>
+  <li>Now edit settings- set hostname(raspberrypi.local), Set username(admin) and password, configure WLAN Wifi name, enable SSH</li>
+  <li>Now finally write the image to the SD card- will take a while.</li>
+</ul>
+
+<p>Raspberry Pi 16GB</p>
+
+<p><img src="/assets/img/pi-16gb.jpg" alt="" /></p>
+
+<p>Cooler, microSD card, and 27W official charger</p>
+
+<p><img src="/assets/img/cooler-SD-charger.png" alt="" /></p>
+
+<h2 id="2-hardware-setup">2. Hardware Setup</h2>
+
+<ul>
+  <li>Join Cooler with the board: Align plastic connectors and stickers to the pi board and hear 2 clicks, then join fan cable to the fan connector on the board.</li>
+  <li>Attach M2.HAT + NVMe SSD: Storage Solution HAT connects the NVMe drive via PCIe.</li>
+  <li>Attach micro-SD card to the bottom of the pi board</li>
+</ul>
+
+<p>Pi and Cooler attached</p>
+
+<p><img src="/assets/img/pi+cooler.png" alt="" /></p>
+
+<p>M.2 HAT+ with 256GB SSD</p>
+
+<p><img src="/assets/img/m2hat-case.jpg" alt="" /></p>
+
+<p>All components combined:</p>
+
+<p><img src="/assets/img/pi+cooler+ssd.jpg" alt="" /></p>
+
+<h2 id="3-boot-up">3. Boot up</h2>
+<ul>
+  <li>Connect power and wifi network.</li>
+  <li>The Pi will boot- the initial setup runs automatically.</li>
+  <li>You can now SSH in from your computer: ssh username@hostname.local</li>
+  <li>If you set: hostname: pi-lab, username: ujwal, You’d connect like this: ssh ujwal@pi-lab.local.
+    <blockquote>
+      <p>After 2 hours of debugging, this was the issue: if ur wifi or ssid is on 5ghz, you must change the channel number to 36, reboot the router, and then finally flash your SD with the image.</p>
+    </blockquote>
+  </li>
+</ul>
+
+<p><img src="/assets/img/wifi-fix.png" alt="" /></p>
+
+<p>finally ssh into the pi:</p>
+
+<p><img src="/assets/img/ssh-successful.png" alt="" /></p>
+
+<h2 id="4-update-software">4. Update software</h2>
+
+<p>This brings Raspberry Pi OS, firmware, and drivers up to date (especially important for Wi-Fi stability and SSD support).</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>apt update <span class="o">&amp;&amp;</span> <span class="nb">sudo </span>apt full-upgrade <span class="nt">-y</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Reboot now, takes 1-2 mins.</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>reboot
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now ssh back into the pi, and boot from the NVMe SSD (faster and more reliable than microSD)</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>raspi-config
+</pre></td></tr></tbody></table></code></pre></div></div>
+<p>Advanced Options → Boot Order → NVMe/USB Boot First
+Then use the “SD Card Copier” tool (sdcardcopy) to clone your system from the microSD to the NVMe drive.
+Power off, remove the microSD card, and power back on — it will now boot from the SSD.</p>
+
+<h2 id="5-copy-sd-to-ssd-for-boot">5. Copy SD to SSD for boot</h2>
+
+<p>Make sure nothing from the NVMe is mounted:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>umount <span class="nt">-R</span> /mnt/clone 2&gt;/dev/null <span class="o">||</span> <span class="nb">true
+</span>lsblk
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Wipe leftover signatures from the NVMe:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>wipefs <span class="nt">-a</span> /dev/nvme0n1
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Clone SD → NVMe (bit-for-bit):</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo dd </span><span class="k">if</span><span class="o">=</span>/dev/mmcblk0 <span class="nv">of</span><span class="o">=</span>/dev/nvme0n1 <span class="nv">bs</span><span class="o">=</span>16M <span class="nv">status</span><span class="o">=</span>progress <span class="nv">conv</span><span class="o">=</span>fsync
+<span class="nb">sudo </span>partprobe /dev/nvme0n1
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Grow the root partition to fill the NVMe. Use growpart (simplest), then grow the filesystem:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>apt-get update
+<span class="nb">sudo </span>apt-get <span class="nb">install</span> <span class="nt">-y</span> cloud-guest-utils
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Expand partition 2 (root) to the end of the disk:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>growpart /dev/nvme0n1 2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Check/resize the ext4 filesystem:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>e2fsck <span class="nt">-f</span> /dev/nvme0n1p2
+<span class="nb">sudo </span>resize2fs /dev/nvme0n1p2
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Boot from NVMe:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre><span class="nb">sudo </span>poweroff
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p>Now remove SD card, power on the PI, it should boot from SSD. Verify after boot:</p>
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+</pre></td><td class="rouge-code"><pre>lsblk <span class="nt">-o</span> NAME,SIZE,FSTYPE,MOUNTPOINT
+mount | <span class="nb">grep</span> <span class="s2">" / "</span>
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<p><img src="/assets/img/boot-from-ssd.png" alt="" /></p>]]></content><author><name>Ujwal Iyer</name></author><category term="Raspberry Pi" /><category term="HAT" /><category term="NVMe SSD" /><summary type="html"><![CDATA[Setup Raspberry Pi5 16 GB, with M.2 HAT+ 256GB SSD Kit, active Cooler with heat sink- and finally install OS on the assembled Pi.]]></summary></entry><entry><title type="html">Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5</title><link href="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/" rel="alternate" type="text/html" title="Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5" /><published>2025-11-02T00:00:00+05:30</published><updated>2025-11-02T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot</id><content type="html" xml:base="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/"><![CDATA[<h2 id="vision">Vision</h2>
 
 <ul>
   <li><strong>Hey Rama</strong> is a voice-first, completely offline learning system built on Raspberry Pi 5 (16 GB).</li>
