@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-04T17:58:07+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Setup Raspberry Pi 5 16GB from scratch</title><link href="https://ujwaliyer.com/posts/RaspberryPi-Setup/" rel="alternate" type="text/html" title="Setup Raspberry Pi 5 16GB from scratch" /><published>2025-11-04T00:00:00+05:30</published><updated>2025-11-04T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/RaspberryPi-Setup</id><content type="html" xml:base="https://ujwaliyer.com/posts/RaspberryPi-Setup/"><![CDATA[<h2 id="1-os-setup">1. OS Setup</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-05T01:03:59+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Setup Raspberry Pi 5 16GB from scratch</title><link href="https://ujwaliyer.com/posts/RaspberryPi-Setup/" rel="alternate" type="text/html" title="Setup Raspberry Pi 5 16GB from scratch" /><published>2025-11-04T00:00:00+05:30</published><updated>2025-11-04T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/RaspberryPi-Setup</id><content type="html" xml:base="https://ujwaliyer.com/posts/RaspberryPi-Setup/"><![CDATA[<h2 id="1-os-setup">1. OS Setup</h2>
 
 <ul>
   <li>Setup Raspberry Pi OS 64-bit (Bookworm) → best for GPIO/camera + easiest device support.</li>
@@ -128,7 +128,56 @@ Power off, remove the microSD card, and power back on — it will now boot from 
 mount | <span class="nb">grep</span> <span class="s2">" / "</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<p><img src="/assets/img/boot-from-ssd.PNG" alt="" /></p>]]></content><author><name>Ujwal Iyer</name></author><category term="Raspberry Pi" /><category term="HAT" /><category term="NVMe SSD" /><summary type="html"><![CDATA[Setup Raspberry Pi5 16 GB, with M.2 HAT+ 256GB SSD Kit, active Cooler with heat sink- and finally install OS on the assembled Pi.]]></summary></entry><entry><title type="html">Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5</title><link href="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/" rel="alternate" type="text/html" title="Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5" /><published>2025-11-02T00:00:00+05:30</published><updated>2025-11-02T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot</id><content type="html" xml:base="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/"><![CDATA[<h2 id="vision">Vision</h2>
+<p><img src="/assets/img/boot-from-ssd.PNG" alt="" /></p>
+
+<h2 id="5-debugging-ssh-issues">5. Debugging SSH issues</h2>
+
+<p>SSH is sometimes pretty flaky. Here are few things which worked for me.</p>
+
+<ul>
+  <li>
+    <p>Ensure ssh is targetting the right ip address. Find the pi’s ip address thru your router: 
+router - network - lan settings - client list. search for client name “raspberrypi”, and then ssh admin@192.168.0.112</p>
+  </li>
+  <li>
+    <p>Check in above client list that both devices are in the same subnet should be something like this 192.168.0.1/24</p>
+  </li>
+  <li>
+    <p>If you flashed the image manually, open the boot partition again and look for a file named:wpa_supplicant.conf. If it doesn’t exist or has wrong details, create/fix it:
+```bash
+country=US
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1</p>
+  </li>
+</ul>
+
+<p>network={
+    ssid=”YourWiFiName”
+    psk=”YourWiFiPassword”
+}</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+</pre></td><td class="rouge-code"><pre>
+* Router usually have 2 band wifis- 2.4ghz and 5ghz(this will have a suffix of _5G post the SSID name). Ensure the laptop ur using to ssh into the pi are in the same wifi band. 
+
+* Clear a stale ssh host key if the Pi was reimaged/keys changed
+```bash
+ssh-keygen -R ip-address-of-pi
+ssh-keygen -R raspberrypi.local
+</pre></td></tr></tbody></table></code></pre></div></div>
+
+<ul>
+  <li>narrow down ssh issues using verbose logs
+    <div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+</pre></td><td class="rouge-code"><pre>ssh <span class="nt">-vvv</span> admin@&lt;pi-ip&gt;
+</pre></td></tr></tbody></table></code></pre></div>    </div>
+  </li>
+</ul>]]></content><author><name>Ujwal Iyer</name></author><category term="Raspberry Pi" /><category term="HAT" /><category term="NVMe SSD" /><summary type="html"><![CDATA[Setup Raspberry Pi5 16 GB, with M.2 HAT+ 256GB SSD Kit, active Cooler with heat sink- and finally install OS on the assembled Pi.]]></summary></entry><entry><title type="html">Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5</title><link href="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/" rel="alternate" type="text/html" title="Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5" /><published>2025-11-02T00:00:00+05:30</published><updated>2025-11-02T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot</id><content type="html" xml:base="https://ujwaliyer.com/posts/HeyRama-buildingVoiceBot/"><![CDATA[<h2 id="vision">Vision</h2>
 
 <ul>
   <li><strong>Hey Rama</strong> is a voice-first, completely offline learning system built on Raspberry Pi 5 (16 GB).</li>
