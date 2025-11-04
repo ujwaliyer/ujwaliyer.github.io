@@ -149,3 +149,39 @@ mount | grep " / "
 
 
 [def3]: /assets/img/boot-from-ssd.PNG
+
+
+## 5. Debugging SSH issues
+
+SSH is sometimes pretty flaky. Here are few things which worked for me. 
+
+* Ensure ssh is targetting the right ip address. Find the pi's ip address thru your router: 
+router - network - lan settings - client list. search for client name "raspberrypi", and then ssh admin@192.168.0.112
+
+* Check in above client list that both devices are in the same subnet should be something like this 192.168.0.1/24
+
+* If you flashed the image manually, open the boot partition again and look for a file named:wpa_supplicant.conf. If it doesn’t exist or has wrong details, create/fix it:
+```bash
+country=US
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+
+network={
+    ssid="YourWiFiName"
+    psk="YourWiFiPassword"
+}
+```
+
+* Router usually have 2 band wifis- 2.4ghz and 5ghz(this will have a suffix of _5G post the SSID name). Ensure the laptop ur using to ssh into the pi are in the same wifi band. 
+
+* Clear a stale ssh host key if the Pi was reimaged/keys changed
+```bash
+ssh-keygen -R ip-address-of-pi
+ssh-keygen -R raspberrypi.local
+```
+
+* narrow down ssh issues using verbose logs 
+```bash
+ssh -vvv admin@<pi-ip>
+```
+
