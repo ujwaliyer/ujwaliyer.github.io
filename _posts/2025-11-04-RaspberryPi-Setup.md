@@ -148,4 +148,4 @@ mount | grep " / "
 ![][def3]
 
 
-[def3]: /assets/img/boot-from-ssd.png
+[def3]: /assets/img/boot-from-ssd.PNG
