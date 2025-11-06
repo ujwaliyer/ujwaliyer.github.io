@@ -68,15 +68,33 @@ This blog will focus on pure user research, and suggest AI frameworks and subseq
 
 Here’s the system I designed for now:
 
-| Step | Who Handles It | Why |
-|------|----------------|-----|
-| Speech-to-Text Cleanup | SymSpell | Fast spelling + grammar correction |
-| Prompt Rewriting | Llama 3.1 7B (Quantized) | Reformulates prompts for similarity search |
-| Vectorize Content | ONNX MiniLM | Transformer based embeddings |
-| Storage/Retrieval | Qdrant | Scalable vector DB + similarity search |
-| Answer Generation | Llama 3.1 7B again | Generates short, story-like responses |
-| Kiddy Guardrails | LlamaGuard | Filter adult/violent content|
-| Text-to-Speech (TTS) | Coqui TTS/System.Speech | Produces human voice output |
+#### Speech-to-Text Cleanup
+- Handled by: SymSpell  
+- Why: Fast spelling and grammar correction  
+
+#### Prompt Rewriting
+- Handled by: Llama 3.1 7B (Quantized)  
+- Why: Reformulates prompts so chunked vector matches correctly  
+
+#### Vectorize Content
+- Handled by: ONNX MiniLM  
+- Why: Transformer-based embeddings  
+
+#### Storage / Retrieval
+- Handled by: Qdrant  
+- Why: Scalable vector DB and similarity search  
+
+#### Answer Generation
+- Handled by: Llama 3.1 7B (again)  
+- Why: Generates short, story-like responses  
+
+#### Kiddy Guardrails
+- Handled by: LlamaGuard  
+- Why: Filters complex or violent content before TTS  
+
+#### Text-to-Speech (TTS)
+- Handled by: Coqui TTS or System.Speech  
+- Why: Produces warm, human-like voice output  
 
 Each component runs locally on the Raspberry Pi, respecting privacy and keeping everything offline.  
 No cloud calls, no hidden data drift - just pure, safe, curious AI for a curious child.  
