@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-06T18:38:37+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot</title><link href="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/" rel="alternate" type="text/html" title="Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot" /><published>2025-11-06T00:00:00+05:30</published><updated>2025-11-06T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions</id><content type="html" xml:base="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/"><![CDATA[<p>As a Senior Product Manager, I’ve spent years obsessing over user personas, friction points, and success metrics. But nothing prepared me for my newest and toughest customer: my five-year-old toddler.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-06T18:57:10+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot</title><link href="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/" rel="alternate" type="text/html" title="Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot" /><published>2025-11-06T00:00:00+05:30</published><updated>2025-11-06T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions</id><content type="html" xml:base="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/"><![CDATA[<p>As a Senior Product Manager, I’ve spent years obsessing over user personas, friction points, and success metrics. But nothing prepared me for my newest and toughest customer: my five-year-old toddler.</p>
 
 <p>He doesn’t just ask questions. He fires rapid, chaotic queries at bedtime.<br />
 “Appa, why Rama go to forest?” (where to start- because his Dasharatha told him so, or because he promised Kaikeyi that he will grant her boon when the time came?)
@@ -41,14 +41,14 @@
   </thead>
   <tbody>
     <tr>
-      <td>Understand epic stories in his own words</td>
-      <td>Parents explain manually</td>
+      <td>Understand epic stories</td>
+      <td>Parents explain</td>
       <td>4</td>
       <td>5</td>
     </tr>
     <tr>
-      <td>Ask science “why” questions safely</td>
-      <td>YouTube Kids or Khan Academy</td>
+      <td>Ask “why” questions safely</td>
+      <td>YT Kids/Khan Academy</td>
       <td>3</td>
       <td>5</td>
     </tr>
@@ -59,7 +59,7 @@
       <td>4</td>
     </tr>
     <tr>
-      <td>Speak naturally and be understood</td>
+      <td>Speak naturally</td>
       <td>Speech-to-text confusion</td>
       <td>4</td>
       <td>5</td>
@@ -107,7 +107,7 @@
     </tr>
     <tr>
       <td>Text-to-Speech</td>
-      <td>Must sound friendly, excited, high-pitch, and child-like</td>
+      <td>Must sound friendly &amp; child-like</td>
       <td>3</td>
       <td>Medium</td>
     </tr>
@@ -143,12 +143,12 @@
     <tr>
       <td>Speech-to-Text Cleanup</td>
       <td>SymSpell</td>
-      <td>Fast spelling and grammar correction</td>
+      <td>Fast spelling + grammar correction</td>
     </tr>
     <tr>
       <td>Prompt Rewriting</td>
       <td>Llama 3.1 7B (Quantized)</td>
-      <td>Reformulates prompts so a chunked vector matches correctly</td>
+      <td>Reformulates prompts for similarity search</td>
     </tr>
     <tr>
       <td>Vectorize Content</td>
@@ -158,7 +158,7 @@
     <tr>
       <td>Storage/Retrieval</td>
       <td>Qdrant</td>
-      <td>Scalable vector DB and similarity search</td>
+      <td>Scalable vector DB + similarity search</td>
     </tr>
     <tr>
       <td>Answer Generation</td>
@@ -168,12 +168,12 @@
     <tr>
       <td>Kiddy Guardrails</td>
       <td>LlamaGuard</td>
-      <td>Filters complex or violent content before TTS</td>
+      <td>Filter adult/violent content</td>
     </tr>
     <tr>
       <td>Text-to-Speech (TTS)</td>
-      <td>Coqui TTS or System.Speech</td>
-      <td>Produces warm, human-like voice output</td>
+      <td>Coqui TTS/System.Speech</td>
+      <td>Produces human voice output</td>
     </tr>
   </tbody>
 </table>
