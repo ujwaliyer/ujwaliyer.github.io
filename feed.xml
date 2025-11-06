@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-06T18:57:10+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot</title><link href="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/" rel="alternate" type="text/html" title="Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot" /><published>2025-11-06T00:00:00+05:30</published><updated>2025-11-06T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions</id><content type="html" xml:base="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/"><![CDATA[<p>As a Senior Product Manager, I’ve spent years obsessing over user personas, friction points, and success metrics. But nothing prepared me for my newest and toughest customer: my five-year-old toddler.</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-06T19:04:44+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot</title><link href="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/" rel="alternate" type="text/html" title="Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot" /><published>2025-11-06T00:00:00+05:30</published><updated>2025-11-06T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions</id><content type="html" xml:base="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/"><![CDATA[<p>As a Senior Product Manager, I’ve spent years obsessing over user personas, friction points, and success metrics. But nothing prepared me for my newest and toughest customer: my five-year-old toddler.</p>
 
 <p>He doesn’t just ask questions. He fires rapid, chaotic queries at bedtime.<br />
 “Appa, why Rama go to forest?” (where to start- because his Dasharatha told him so, or because he promised Kaikeyi that he will grant her boon when the time came?)
@@ -131,52 +131,47 @@
 
 <p>Here’s the system I designed for now:</p>
 
-<table>
-  <thead>
-    <tr>
-      <th>Step</th>
-      <th>Who Handles It</th>
-      <th>Why</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Speech-to-Text Cleanup</td>
-      <td>SymSpell</td>
-      <td>Fast spelling + grammar correction</td>
-    </tr>
-    <tr>
-      <td>Prompt Rewriting</td>
-      <td>Llama 3.1 7B (Quantized)</td>
-      <td>Reformulates prompts for similarity search</td>
-    </tr>
-    <tr>
-      <td>Vectorize Content</td>
-      <td>ONNX MiniLM</td>
-      <td>Transformer based embeddings</td>
-    </tr>
-    <tr>
-      <td>Storage/Retrieval</td>
-      <td>Qdrant</td>
-      <td>Scalable vector DB + similarity search</td>
-    </tr>
-    <tr>
-      <td>Answer Generation</td>
-      <td>Llama 3.1 7B again</td>
-      <td>Generates short, story-like responses</td>
-    </tr>
-    <tr>
-      <td>Kiddy Guardrails</td>
-      <td>LlamaGuard</td>
-      <td>Filter adult/violent content</td>
-    </tr>
-    <tr>
-      <td>Text-to-Speech (TTS)</td>
-      <td>Coqui TTS/System.Speech</td>
-      <td>Produces human voice output</td>
-    </tr>
-  </tbody>
-</table>
+<h4 id="speech-to-text-cleanup">Speech-to-Text Cleanup</h4>
+<ul>
+  <li>Handled by: SymSpell</li>
+  <li>Why: Fast spelling and grammar correction</li>
+</ul>
+
+<h4 id="prompt-rewriting">Prompt Rewriting</h4>
+<ul>
+  <li>Handled by: Llama 3.1 7B (Quantized)</li>
+  <li>Why: Reformulates prompts so chunked vector matches correctly</li>
+</ul>
+
+<h4 id="vectorize-content">Vectorize Content</h4>
+<ul>
+  <li>Handled by: ONNX MiniLM</li>
+  <li>Why: Transformer-based embeddings</li>
+</ul>
+
+<h4 id="storage--retrieval">Storage / Retrieval</h4>
+<ul>
+  <li>Handled by: Qdrant</li>
+  <li>Why: Scalable vector DB and similarity search</li>
+</ul>
+
+<h4 id="answer-generation">Answer Generation</h4>
+<ul>
+  <li>Handled by: Llama 3.1 7B (again)</li>
+  <li>Why: Generates short, story-like responses</li>
+</ul>
+
+<h4 id="kiddy-guardrails">Kiddy Guardrails</h4>
+<ul>
+  <li>Handled by: LlamaGuard</li>
+  <li>Why: Filters complex or violent content before TTS</li>
+</ul>
+
+<h4 id="text-to-speech-tts">Text-to-Speech (TTS)</h4>
+<ul>
+  <li>Handled by: Coqui TTS or System.Speech</li>
+  <li>Why: Produces warm, human-like voice output</li>
+</ul>
 
 <p>Each component runs locally on the Raspberry Pi, respecting privacy and keeping everything offline.<br />
 No cloud calls, no hidden data drift - just pure, safe, curious AI for a curious child.</p>
