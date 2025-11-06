@@ -36,10 +36,10 @@ This blog will focus on pure user research, and suggest AI frameworks and subseq
 
 | Job | Current Workaround | Pain (1–5) | Gain if Solved (1–5) |
 |------|--------------------|-------------|------------------------|
-| Understand epic stories in his own words | Parents explain manually | 4 | 5 |
-| Ask science “why” questions safely | YouTube Kids or Khan Academy | 3 | 5 |
+| Understand epic stories | Parents explain | 4 | 5 |
+| Ask “why” questions safely | YT Kids/Khan Academy | 3 | 5 |
 | Stay engaged for short bursts | Cartoons | 5 | 4 |
-| Speak naturally and be understood | Speech-to-text confusion | 4 | 5 |
+| Speak naturally | Speech-to-text confusion | 4 | 5 |
 
 ---
 
@@ -51,7 +51,7 @@ This blog will focus on pure user research, and suggest AI frameworks and subseq
 | Query Understanding | Needs semantic rewriting | 5 | High |
 | Answer Generation | Too long / too abstract | 4 | High |
 | Response Filtering | Unsafe/adult/violent content | 5 | Critical |
-| Text-to-Speech | Must sound friendly, excited, high-pitch, and child-like | 3 | Medium |
+| Text-to-Speech | Must sound friendly & child-like | 3 | Medium |
 
 ---
 
@@ -70,13 +70,13 @@ Here’s the system I designed for now:
 
 | Step | Who Handles It | Why |
 |------|----------------|-----|
-| Speech-to-Text Cleanup | SymSpell | Fast spelling and grammar correction |
-| Prompt Rewriting | Llama 3.1 7B (Quantized) | Reformulates prompts so a chunked vector matches correctly |
+| Speech-to-Text Cleanup | SymSpell | Fast spelling + grammar correction |
+| Prompt Rewriting | Llama 3.1 7B (Quantized) | Reformulates prompts for similarity search |
 | Vectorize Content | ONNX MiniLM | Transformer based embeddings |
-| Storage/Retrieval | Qdrant | Scalable vector DB and similarity search |
+| Storage/Retrieval | Qdrant | Scalable vector DB + similarity search |
 | Answer Generation | Llama 3.1 7B again | Generates short, story-like responses |
-| Kiddy Guardrails | LlamaGuard | Filters complex or violent content before TTS |
-| Text-to-Speech (TTS) | Coqui TTS or System.Speech | Produces warm, human-like voice output |
+| Kiddy Guardrails | LlamaGuard | Filter adult/violent content|
+| Text-to-Speech (TTS) | Coqui TTS/System.Speech | Produces human voice output |
 
 Each component runs locally on the Raspberry Pi, respecting privacy and keeping everything offline.  
 No cloud calls, no hidden data drift - just pure, safe, curious AI for a curious child.  
