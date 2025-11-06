@@ -1,4 +1,10 @@
-# Unpacking toddler persona & AI-ML solutions for an AI Voice Bot
+---
+title: "Unpacking toddler persona & AI-ML solutions for an AI Voice Bot"
+date: 2025-11-06
+categories: [AI Projects, Product Management, Raspberry Pi, Learning by Building]
+tags: [AI Voicebot, Toddler Persona, .NET, Llama3, RAG, Qdrant, SymSpell, ONNX, LlamaGuard, Coqui TTS, Product Thinking, Hands-on AI, Raspberry Pi 5, Edge AI, Family Tech]
+description: "How a Dad, who's a Product Manager is learning AI hands-on by building a safe, voice-only LLM companion for his child - blending parenting, product thinking, and technology."
+---
 
 As a Senior Product Manager, I’ve spent years obsessing over user personas, friction points, and success metrics. But nothing prepared me for my newest and toughest customer: my five-year-old toddler. 
 
