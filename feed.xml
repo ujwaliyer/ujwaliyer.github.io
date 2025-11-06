@@ -1,4 +1,208 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-06T10:32:39+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Setup Raspberry Pi 5 16GB from scratch</title><link href="https://ujwaliyer.com/posts/RaspberryPi-Setup/" rel="alternate" type="text/html" title="Setup Raspberry Pi 5 16GB from scratch" /><published>2025-11-04T00:00:00+05:30</published><updated>2025-11-04T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/RaspberryPi-Setup</id><content type="html" xml:base="https://ujwaliyer.com/posts/RaspberryPi-Setup/"><![CDATA[<h2 id="1-os-setup">1. OS Setup</h2>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-06T18:30:07+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">Toddlerpersonaresearch Ai Solutions</title><link href="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/" rel="alternate" type="text/html" title="Toddlerpersonaresearch Ai Solutions" /><published>2025-11-06T00:00:00+05:30</published><updated>2025-11-06T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions</id><content type="html" xml:base="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/"><![CDATA[<h1 id="unpacking-toddler-persona--ai-ml-solutions-for-an-ai-voice-bot">Unpacking toddler persona &amp; AI-ML solutions for an AI Voice Bot</h1>
+
+<p>As a Senior Product Manager, I’ve spent years obsessing over user personas, friction points, and success metrics. But nothing prepared me for my newest and toughest customer: my five-year-old toddler.</p>
+
+<p>He doesn’t just ask questions. He fires rapid, chaotic queries at bedtime.<br />
+“Appa, why Rama go to forest?” (where to start- because his Dasharatha told him so, or because he promised Kaikeyi that he will grant her boon when the time came?)
+“Why did Krishna help Arjuna but not Duryodhana?” (tough to explain righteousness/dharma)<br />
+“Why gas fire blue but diya fire red?” (I still don’t know!)</p>
+
+<p>This blog will focus on pure user research, and suggest AI frameworks and subsequent solutions of the pain point faced by me.</p>
+
+<hr />
+
+<h2 id="1-persona-deep-dive-the-curious-toddler">1. Persona Deep Dive: “The Curious toddler”</h2>
+
+<h3 id="who-he-is">Who he is</h3>
+<ul>
+  <li>Age: 5 years</li>
+  <li>Context: bilingual (English + Tamil)</li>
+  <li>Hardware: Raspberry Pi 5, 16GB</li>
+  <li>Interface: Voice only - no screen, no keyboard</li>
+</ul>
+
+<h3 id="behavior-traits">Behavior Traits</h3>
+<ul>
+  <li>Speaks in short, broken english</li>
+  <li>Has a 20-second patience window hence easily distracted - responses longer than 20 seconds are lost</li>
+  <li>Emotionally reactive - cannot have wrong tone or scary words</li>
+</ul>
+
+<hr />
+
+<h2 id="2-jobs-to-be-done--paingain-matrix">2. Jobs-to-be-Done + Pain/Gain Matrix</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Job</th>
+      <th>Current Workaround</th>
+      <th>Pain (1–5)</th>
+      <th>Gain if Solved (1–5)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Understand epic stories in his own words</td>
+      <td>Parents explain manually</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Ask science “why” questions safely</td>
+      <td>YouTube Kids or Khan Academy</td>
+      <td>3</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <td>Stay engaged for short bursts</td>
+      <td>Cartoons</td>
+      <td>5</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <td>Speak naturally and be understood</td>
+      <td>Speech-to-text confusion</td>
+      <td>4</td>
+      <td>5</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="3-friction-heatmap">3. Friction Heatmap</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Stage</th>
+      <th>Friction</th>
+      <th>Severity (1–5)</th>
+      <th>Fix Priority</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Voice to Text</td>
+      <td>Broken grammar</td>
+      <td>5</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Query Understanding</td>
+      <td>Needs semantic rewriting</td>
+      <td>5</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Answer Generation</td>
+      <td>Too long / too abstract</td>
+      <td>4</td>
+      <td>High</td>
+    </tr>
+    <tr>
+      <td>Response Filtering</td>
+      <td>Unsafe/adult/violent content</td>
+      <td>5</td>
+      <td>Critical</td>
+    </tr>
+    <tr>
+      <td>Text-to-Speech</td>
+      <td>Must sound friendly, excited, high-pitch, and child-like</td>
+      <td>3</td>
+      <td>Medium</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h2 id="4-success-metrics">4. Success Metrics</h2>
+
+<ul>
+  <li>Attention Retention: responses under 20 seconds</li>
+  <li>Understanding Score: answers correctly paraphrased by child</li>
+  <li>Safe Response Ratio: age-safe answers</li>
+  <li>Latency: TTS response delivered under 2 seconds</li>
+</ul>
+
+<hr />
+
+<h2 id="5-technical-blueprint-ai-concepts-to-solve-friction--jobs-to-be-done">5. Technical Blueprint: AI Concepts to solve Friction &amp; Jobs to be done</h2>
+
+<p>Here’s the system I designed for now:</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Step</th>
+      <th>Who Handles It</th>
+      <th>Why</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>Speech-to-Text Cleanup</td>
+      <td>SymSpell</td>
+      <td>Fast spelling and grammar correction</td>
+    </tr>
+    <tr>
+      <td>Prompt Rewriting</td>
+      <td>Llama 3.1 7B (Quantized)</td>
+      <td>Reformulates prompts so a chunked vector matches correctly</td>
+    </tr>
+    <tr>
+      <td>Vectorize Content</td>
+      <td>ONNX MiniLM</td>
+      <td>Transformer based embeddings</td>
+    </tr>
+    <tr>
+      <td>Storage/Retrieval</td>
+      <td>Qdrant</td>
+      <td>Scalable vector DB and similarity search</td>
+    </tr>
+    <tr>
+      <td>Answer Generation</td>
+      <td>Llama 3.1 7B again</td>
+      <td>Generates short, story-like responses</td>
+    </tr>
+    <tr>
+      <td>Kiddy Guardrails</td>
+      <td>LlamaGuard</td>
+      <td>Filters complex or violent content before TTS</td>
+    </tr>
+    <tr>
+      <td>Text-to-Speech (TTS)</td>
+      <td>Coqui TTS or System.Speech</td>
+      <td>Produces warm, human-like voice output</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Each component runs locally on the Raspberry Pi, respecting privacy and keeping everything offline.<br />
+No cloud calls, no hidden data drift - just pure, safe, curious AI for a curious child.</p>
+
+<hr />
+
+<h2 id="6-why-net-makes-it-possible">6. Why .NET Makes It Possible</h2>
+
+<p>I chose .NET not just out of nostalgia, but also because the AI ecosystem quietly supports all of this:</p>
+
+<ul>
+  <li>STT + TTS → System.Speech namespace or Coqui integration via C#</li>
+  <li>Qdrant Vector DB → Official .NET client with REST bindings</li>
+  <li>ONNX Runtime → Runs MiniLM embeddings natively on CPU</li>
+  <li>Llama 3.1 7B (GGUF) → Compatible via llama.cpp bindings for .NET</li>
+  <li>SymSpell.NET → Lightweight typo and grammar fixer</li>
+  <li>LLamaSharp → C# binding for llama.cpp so can load LlamaGuard model</li>
+</ul>
+
+<hr />
+
+<h3 id="watch-this-space">Watch this space</h3>
+<p>I’ll be sharing the step-by-step build of this <strong>AI Toddler Explorer</strong> soon - from RAG pipelines to voice tuning - all on a humble Raspberry Pi 5.<br />
+Follow my journey at <a href="https://ujwaliyer.com">ujwaliyer.com</a> - where bedtime questions meet machine learning.</p>]]></content><author><name></name></author><summary type="html"><![CDATA[Unpacking toddler persona &amp; AI-ML solutions for an AI Voice Bot]]></summary></entry><entry><title type="html">Setup Raspberry Pi 5 16GB from scratch</title><link href="https://ujwaliyer.com/posts/RaspberryPi-Setup/" rel="alternate" type="text/html" title="Setup Raspberry Pi 5 16GB from scratch" /><published>2025-11-04T00:00:00+05:30</published><updated>2025-11-04T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/RaspberryPi-Setup</id><content type="html" xml:base="https://ujwaliyer.com/posts/RaspberryPi-Setup/"><![CDATA[<h2 id="1-os-setup">1. OS Setup</h2>
 
 <ul>
   <li>Setup Raspberry Pi OS 64-bit (Bookworm) → best for GPIO/camera + easiest device support.</li>
