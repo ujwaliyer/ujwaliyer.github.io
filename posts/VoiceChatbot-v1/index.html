@@ -1,0 +1,493 @@
+<!doctype html><html lang="en" ><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f7f7"><meta name="theme-color" media="(prefers-color-scheme: dark)" content="#1b1b1e"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="viewport" content="width=device-width, user-scalable=no initial-scale=1, shrink-to-fit=no, viewport-fit=cover" ><meta name="generator" content="Jekyll v4.4.1" /><meta property="og:title" content="A working raspberry pi voice chat bot version 1" /><meta name="author" content="Ujwal Iyer" /><meta property="og:locale" content="en" /><meta name="description" content="First version of a working and offline voice bot" /><meta property="og:description" content="First version of a working and offline voice bot" /><link rel="canonical" href="https://ujwaliyer.com/posts/VoiceChatbot-v1/" /><meta property="og:url" content="https://ujwaliyer.com/posts/VoiceChatbot-v1/" /><meta property="og:site_name" content="Ujwal Iyer" /><meta property="og:type" content="article" /><meta property="article:published_time" content="2025-11-25T00:00:00+05:30" /><meta name="twitter:card" content="summary" /><meta property="twitter:title" content="A working raspberry pi voice chat bot version 1" /><meta name="twitter:site" content="@ujwaliyer" /><meta name="twitter:creator" content="@Ujwal Iyer" /> <script type="application/ld+json"> {"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Ujwal Iyer"},"dateModified":"2025-11-25T00:00:00+05:30","datePublished":"2025-11-25T00:00:00+05:30","description":"First version of a working and offline voice bot","headline":"A working raspberry pi voice chat bot version 1","mainEntityOfPage":{"@type":"WebPage","@id":"https://ujwaliyer.com/posts/VoiceChatbot-v1/"},"url":"https://ujwaliyer.com/posts/VoiceChatbot-v1/"}</script><title>A working raspberry pi voice chat bot version 1 | Ujwal Iyer</title><link rel="icon" type="image/png" href="/assets/img/favicons/favicon-96x96.png" sizes="96x96"><link rel="icon" type="image/svg+xml" href="/assets/img/favicons/favicon.svg"><link rel="shortcut icon" href="/assets/img/favicons/favicon.ico"><link rel="apple-touch-icon" sizes="180x180" href="/assets/img/favicons/apple-touch-icon.png"><link rel="manifest" href="/assets/img/favicons/site.webmanifest"><link rel="preconnect" href="https://fonts.googleapis.com" ><link rel="dns-prefetch" href="https://fonts.googleapis.com" ><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="dns-prefetch" href="https://fonts.gstatic.com" ><link rel="preconnect" href="https://cdn.jsdelivr.net" ><link rel="dns-prefetch" href="https://cdn.jsdelivr.net" ><link rel="stylesheet" href="/assets/css/jekyll-theme-chirpy.css"><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Source+Sans+Pro:wght@400;600;700;900&display=swap"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@7.1.0/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/tocbot@4.36.4/dist/tocbot.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/glightbox@3.3.0/dist/css/glightbox.min.css"> <script src="/assets/js/dist/theme.min.js"></script> <script defer src="https://cdn.jsdelivr.net/combine/npm/simple-jekyll-search@1.10.0/dest/simple-jekyll-search.min.js,npm/loading-attribute-polyfill@2.1.1/dist/loading-attribute-polyfill.umd.min.js,npm/glightbox@3.3.0/dist/js/glightbox.min.js,npm/clipboard@2.0.11/dist/clipboard.min.js,npm/dayjs@1.11.18/dayjs.min.js,npm/dayjs@1.11.18/locale/en.js,npm/dayjs@1.11.18/plugin/relativeTime.js,npm/dayjs@1.11.18/plugin/localizedFormat.js,npm/tocbot@4.36.4/dist/tocbot.min.js"></script> <script defer src="/assets/js/dist/post.min.js"></script> <script defer src="/app.min.js?baseurl=&register=true" ></script><body><aside aria-label="Sidebar" id="sidebar" class="d-flex flex-column align-items-end"><header class="profile-wrapper"> <a href="/" id="avatar" class="rounded-circle"></a> <a class="site-title d-block" href="/">Ujwal Iyer</a><p class="site-subtitle fst-italic mb-0">Learnings, Experiments & Notes"</p></header><nav class="flex-column flex-grow-1 w-100 ps-0"><ul class="nav"><li class="nav-item"> <a href="/" class="nav-link"> <i class="fa-fw fas fa-home"></i> <span>HOME</span> </a><li class="nav-item"> <a href="/categories/" class="nav-link"> <i class="fa-fw fas fa-stream"></i> <span>CATEGORIES</span> </a><li class="nav-item"> <a href="/tags/" class="nav-link"> <i class="fa-fw fas fa-tags"></i> <span>TAGS</span> </a><li class="nav-item"> <a href="/archives/" class="nav-link"> <i class="fa-fw fas fa-archive"></i> <span>ARCHIVES</span> </a><li class="nav-item"> <a href="/about/" class="nav-link"> <i class="fa-fw fas fa-info-circle"></i> <span>ABOUT</span> </a></ul></nav><div class="sidebar-bottom d-flex flex-wrap align-items-center w-100"> <button type="button" class="btn btn-link nav-link" aria-label="Switch Mode" id="mode-toggle"> <i class="fas fa-adjust"></i> </button> <span class="icon-border"></span> <a href="https://github.com/ujwaliyer" aria-label="github" target="_blank" rel="noopener noreferrer" > <i class="fab fa-github"></i> </a> <a href="https://twitter.com/ujwaliyer" aria-label="twitter" target="_blank" rel="noopener noreferrer" > <i class="fa-brands fa-x-twitter"></i> </a> <a href="javascript:location.href = 'mailto:' + ['ujwaliyer','live.com'].join('@')" aria-label="email" > <i class="fas fa-envelope"></i> </a> <a href="/feed.xml" aria-label="rss" > <i class="fas fa-rss"></i> </a></div></aside><div id="main-wrapper" class="d-flex justify-content-center"><div class="container d-flex flex-column px-xxl-5"><header id="topbar-wrapper" class="flex-shrink-0" aria-label="Top Bar"><div id="topbar" class="d-flex align-items-center justify-content-between px-lg-3 h-100" ><nav id="breadcrumb" aria-label="Breadcrumb"> <span> <a href="/">Home</a> </span> <span>A working raspberry pi voice chat bot version 1</span></nav><button type="button" id="sidebar-trigger" class="btn btn-link" aria-label="Sidebar"> <i class="fas fa-bars fa-fw"></i> </button><div id="topbar-title"> Post</div><button type="button" id="search-trigger" class="btn btn-link" aria-label="Search"> <i class="fas fa-search fa-fw"></i> </button> <search id="search" class="align-items-center ms-3 ms-lg-0"> <i class="fas fa-search fa-fw"></i> <input class="form-control" id="search-input" type="search" aria-label="search" autocomplete="off" placeholder="Search..." > </search> <button type="button" class="btn btn-link text-decoration-none" id="search-cancel">Cancel</button></div></header><div class="row flex-grow-1"><main aria-label="Main Content" class="col-12 col-lg-11 col-xl-9 px-md-4"><article class="px-1" data-toc="true"><header><h1 data-toc-skip>A working raspberry pi voice chat bot version 1</h1><p class="post-desc fw-light mb-4">First version of a working and offline voice bot</p><div class="post-meta text-muted"> <span> Posted <time data-ts="1764009000" data-df="ll" data-bs-toggle="tooltip" data-bs-placement="bottom" > Nov 25, 2025 </time> </span><div class="d-flex justify-content-between"> <span> By <em> </em> </span><div> <span class="readtime" data-bs-toggle="tooltip" data-bs-placement="bottom" title="1487 words" > <em>8 min</em> read</span></div></div></div></header><div id="toc-bar" class="d-flex align-items-center justify-content-between invisible"> <span class="label text-truncate">A working raspberry pi voice chat bot version 1</span> <button type="button" class="toc-trigger btn me-1"> <i class="fa-solid fa-list-ul fa-fw"></i> </button></div><button id="toc-solo-trigger" type="button" class="toc-trigger btn btn-outline-secondary btn-sm"> <span class="label ps-2 pe-1">Contents</span> <i class="fa-solid fa-angle-right fa-fw"></i> </button> <dialog id="toc-popup" class="p-0"><div class="header d-flex flex-row align-items-center justify-content-between"><div class="label text-truncate py-2 ms-4">A working raspberry pi voice chat bot version 1</div><button id="toc-popup-close" type="button" class="btn mx-1 my-1 opacity-75"> <i class="fas fa-close"></i> </button></div><div id="toc-popup-content" class="px-4 py-3 pb-4"></div></dialog><div class="content"><p>This post walks through the full system I built:</p><ul><li>Architecture<li>Libraries and tools<li>How each service works<li>The Ramayana RAG pipeline<li>Key C# snippets that glue everything together</ul><div class="video"> <iframe src="https://www.youtube-nocookie.com/embed/bkTHjwxW17Y?rel=0&amp;modestbranding=1" title="Hey Rama Demo v1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy"> </iframe></div><h2 id="1-what-this-bot-actually-does"><span class="me-2">1. What this bot actually does</span><a href="#1-what-this-bot-actually-does" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>As of today, my Kid Voice Bot can:</p><ul><li>Record audio from a USB mic for a few seconds<li>Transcribe it to text with Whisper<li>Optionally pull context from a Ramayana PDF using a custom RAG index<li>Ask Ollama (Llama 3.2 1B) for a short kid friendly answer<li>Speak the answer using Piper TTS<li>Play the audio out of speakers</ul><p>The whole thing is wrapped in a simple console UX:</p><ul><li>Hit ENTER to record<li>Bot answers in voice<li>Type <code class="language-plaintext highlighter-rouge">/quit</code> to exit</ul><p>All core behaviour is config driven from <code class="language-plaintext highlighter-rouge">appsettings.json</code></p><h2 id="2-architecture"><span class="me-2">2. Architecture</span><a href="#2-architecture" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><div class="table-wrapper"><table><thead><tr><th>Layer<th>Technology<th>Why<tbody><tr><td><strong>STT</strong><td>Whisper (whisper.cpp via Whisper.Net)<td>Fast, accurate, runs on Pi 5<tr><td><strong>LLM</strong><td>Ollama (Llama 3.2 1B)<td>Tight latency + high control<tr><td><strong>TTS</strong><td>Piper<td>Natural child-friendly voice, ultra fast<tr><td><strong>RAG</strong><td>Embedding + cosine similarity + Ramayana PDF<td>Cultural grounding<tr><td><strong>Audio</strong><td>arecord + aplay<td>Works well with ALSA on Raspberry Pi<tr><td><strong>Language</strong><td>C# .NET 8<td>Strong typing + easy modularization</table></div><h3 id="logical-components"><span class="me-2">Logical Components</span><a href="#logical-components" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h3><p><a href="/assets/img/ProjectStructure.png" class="popup img-link shimmer"><img src="/assets/img/ProjectStructure.png" alt="" loading="lazy"></a></p><p>Audio layer</p><ul><li>AudioRecorder for recording<li>AudioPlayer for playback</ul><p>Model layer</p><ul><li>WhisperTranscriber for speech to text<li>OllamaClient for LLM calls<li>PiperSpeaker for text to speech</ul><p>RAG layer</p><ul><li>RamayanaIndexer to build a JSON index from a Ramayana PDF<li>RamayanaRagService to fetch relevant chunks at runtime</ul><p>Orchestration layer</p><ul><li>KidBot - the main loop that ties everything together<li>Program - entry point and mode switch (index vs run)</ul><p>Configuration</p><ul><li>appsettings.json and Config classes</ul><h2 id="3-configuration-driven-system"><span class="me-2">3. Configuration-Driven System</span><a href="#3-configuration-driven-system" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Everything works off a single appsettings.json file. This makes testing/tuning easy.</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+</pre><td class="rouge-code"><pre><span class="o">{</span>
+  <span class="s2">"Audio"</span>: <span class="o">{</span>
+    <span class="s2">"SampleRate"</span>: 16000,
+    <span class="s2">"Channels"</span>: 1,
+    <span class="s2">"SecondsPerClip"</span>: 4
+  <span class="o">}</span>,
+  <span class="s2">"Models"</span>: <span class="o">{</span>
+    <span class="s2">"WhisperPath"</span>: <span class="s2">"/home/admin/models/whisper/ggml-base.en-q5_1.bin"</span>,
+    <span class="s2">"PiperVoicePath"</span>: <span class="s2">"/home/admin/models/piper/en_US-amy-medium.onnx"</span>,
+    <span class="s2">"PiperExe"</span>: <span class="s2">"/home/admin/.piper-venv/bin/piper"</span>
+  <span class="o">}</span>,
+  <span class="s2">"Ollama"</span>: <span class="o">{</span>
+    <span class="s2">"BaseUrl"</span>: <span class="s2">"http://localhost:11434"</span>,
+    <span class="s2">"Model"</span>: <span class="s2">"llama3.2:1b"</span>,
+    <span class="s2">"SystemPrompt"</span>: <span class="s2">"You are a friendly, kid-safe assistant. Use very simple words, 2-3 short sentences."</span>
+  <span class="o">}</span>,
+  <span class="s2">"Rag"</span>: <span class="o">{</span>
+    <span class="s2">"Enabled"</span>: <span class="nb">true</span>,
+    <span class="s2">"QdrantEndpoint"</span>: <span class="s2">"http://localhost:6333"</span>,
+    <span class="s2">"CollectionName"</span>: <span class="s2">"ramayana"</span>,
+    <span class="s2">"EmbeddingModel"</span>: <span class="s2">"nomic-embed-text"</span>,
+    <span class="s2">"TopK"</span>: 3
+  <span class="o">}</span>,
+  <span class="s2">"Ramayana"</span>: <span class="o">{</span>
+    <span class="s2">"PdfPath"</span>: <span class="s2">"/home/admin/data/ramayana.pdf"</span>,
+    <span class="s2">"ChunkCharacters"</span>: 900,
+    <span class="s2">"IndexPath"</span>: <span class="s2">"/home/admin/data/ramayana_index.json"</span>
+  <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h2 id="4-audio-layer-recording--playback"><span class="me-2">4. Audio Layer (Recording + Playback)</span><a href="#4-audio-layer-recording--playback" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>On the Pi I decided to keep it simple and lean on ALSA using lightweight process wrappers inside the AudioServices.cs class. ALSA is the lowest level of the Linux sound stack, and can be access through the CLI.</p><p>Recording (AudioRecorder)</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+</pre><td class="rouge-code"><pre>public static async Task&lt;string&gt; RecordWavAsync<span class="o">(</span>string path, AudioConfig cfg<span class="o">)</span>
+<span class="o">{</span>
+    var args <span class="o">=</span> <span class="s2">$"-f S16_LE -r {cfg.SampleRate} -c {cfg.Channels} "</span> +
+               <span class="s2">$"-d {cfg.SecondsPerClip} -t wav -q </span><span class="se">\"</span><span class="s2">{path}</span><span class="se">\"</span><span class="s2">"</span><span class="p">;</span>
+
+    var psi <span class="o">=</span> new ProcessStartInfo<span class="o">(</span><span class="s2">"arecord"</span>, args<span class="o">)</span>
+    <span class="o">{</span>
+        RedirectStandardError <span class="o">=</span> <span class="nb">true</span>,
+        RedirectStandardOutput <span class="o">=</span> <span class="nb">true</span>
+    <span class="o">}</span><span class="p">;</span>
+
+    using var p <span class="o">=</span> Process.Start<span class="o">(</span>psi<span class="o">)</span><span class="p">;</span>
+    <span class="k">if</span> <span class="o">(</span>p <span class="o">==</span> null<span class="o">)</span>
+        throw new InvalidOperationException<span class="o">(</span><span class="s2">"Failed to start 'arecord'."</span><span class="o">)</span><span class="p">;</span>
+
+    await p.WaitForExitAsync<span class="o">()</span><span class="p">;</span>
+    <span class="k">if</span> <span class="o">(</span>p.ExitCode <span class="o">!=</span> 0<span class="o">)</span>
+    <span class="o">{</span>
+        var err <span class="o">=</span> await p.StandardError.ReadToEndAsync<span class="o">()</span><span class="p">;</span>
+        throw new InvalidOperationException<span class="o">(</span><span class="s2">$"arecord failed: {err}"</span><span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return </span>path<span class="p">;</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>Playback (AudioPlayer)</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+</pre><td class="rouge-code"><pre>public static async Task PlayWavAsync<span class="o">(</span>string wavPath<span class="o">)</span>
+<span class="o">{</span>
+    var psi <span class="o">=</span> new ProcessStartInfo<span class="o">(</span><span class="s2">"aplay"</span>, <span class="s2">$"</span><span class="se">\"</span><span class="s2">{wavPath}</span><span class="se">\"</span><span class="s2">"</span><span class="o">)</span>
+    <span class="o">{</span>
+        RedirectStandardError <span class="o">=</span> <span class="nb">true</span>,
+        RedirectStandardOutput <span class="o">=</span> <span class="nb">true</span>
+    <span class="o">}</span><span class="p">;</span>
+
+    using var p <span class="o">=</span> Process.Start<span class="o">(</span>psi<span class="o">)</span><span class="p">;</span>
+    <span class="k">if</span> <span class="o">(</span>p <span class="o">==</span> null<span class="o">)</span>
+    <span class="o">{</span>
+        Console.WriteLine<span class="o">(</span><span class="s2">"Could not start 'aplay'."</span><span class="o">)</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    await p.WaitForExitAsync<span class="o">()</span><span class="p">;</span>
+    <span class="k">if</span> <span class="o">(</span>p.ExitCode <span class="o">!=</span> 0<span class="o">)</span>
+    <span class="o">{</span>
+        var err <span class="o">=</span> await p.StandardError.ReadToEndAsync<span class="o">()</span><span class="p">;</span>
+        Console.WriteLine<span class="o">(</span><span class="s2">$"aplay error: {err}"</span><span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h2 id="5-whisper-stt-integration"><span class="me-2">5. Whisper STT Integration</span><a href="#5-whisper-stt-integration" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>For STT, I used Whisper.Net, which wraps whisper.cpp nicely for C#. I load the GGML model from the config path.</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>public WhisperTranscriber<span class="o">(</span>string modelPath<span class="o">)</span>
+<span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span>string.IsNullOrWhiteSpace<span class="o">(</span>modelPath<span class="o">))</span>
+        throw new ArgumentException<span class="o">(</span><span class="s2">"Whisper model path is not configured."</span>, nameof<span class="o">(</span>modelPath<span class="o">))</span><span class="p">;</span>
+
+    _factory <span class="o">=</span> WhisperFactory.FromPath<span class="o">(</span>modelPath<span class="o">)</span><span class="p">;</span>
+    _processor <span class="o">=</span> _factory.CreateBuilder<span class="o">()</span>
+        .WithLanguage<span class="o">(</span><span class="s2">"en"</span><span class="o">)</span>
+        .Build<span class="o">()</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>running the actual transcription below, which gives me plain text from the child’s speech. I keep it raw and simple and handle grammar problems at the LLM layer.</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+</pre><td class="rouge-code"><pre>public async Task&lt;string&gt; TranscribeAsync<span class="o">(</span>string wavPath<span class="o">)</span>
+<span class="o">{</span>
+    <span class="k">if</span> <span class="o">(!</span>File.Exists<span class="o">(</span>wavPath<span class="o">))</span>
+        throw new FileNotFoundException<span class="o">(</span><span class="s2">"Audio file not found"</span>, wavPath<span class="o">)</span><span class="p">;</span>
+
+    var sb <span class="o">=</span> new StringBuilder<span class="o">()</span><span class="p">;</span>
+
+    await using var fs <span class="o">=</span> File.OpenRead<span class="o">(</span>wavPath<span class="o">)</span><span class="p">;</span>
+    await foreach <span class="o">(</span>var segment <span class="k">in </span>_processor.ProcessAsync<span class="o">(</span>fs<span class="o">))</span>
+    <span class="o">{</span>
+        sb.Append<span class="o">(</span>segment.Text<span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    <span class="k">return </span>sb.ToString<span class="o">()</span>.Trim<span class="o">()</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h2 id="6-piper-tts--speaking-back-to-the-child"><span class="me-2">6. Piper TTS- speaking back to the child</span><a href="#6-piper-tts--speaking-back-to-the-child" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Piper is called as an external process as well. Again, small wrapper, clear contract.</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+</pre><td class="rouge-code"><pre>public PiperSpeaker<span class="o">(</span>ModelsConfig models<span class="o">)</span>
+<span class="o">{</span>
+    _exe <span class="o">=</span> string.IsNullOrWhiteSpace<span class="o">(</span>models.PiperExe<span class="o">)</span>
+        ? <span class="s2">"/usr/bin/piper"</span>
+        : models.PiperExe<span class="p">;</span>
+
+    _modelPath <span class="o">=</span> models.PiperVoicePath<span class="p">;</span>
+
+    <span class="k">if</span> <span class="o">(</span>string.IsNullOrWhiteSpace<span class="o">(</span>_modelPath<span class="o">))</span>
+        throw new ArgumentException<span class="o">(</span><span class="s2">"Piper voice model path is not configured."</span>, nameof<span class="o">(</span>models.PiperVoicePath<span class="o">))</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></table></code></div></div><p>The actual speech:</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+</pre><td class="rouge-code"><pre>public async Task SpeakAsync<span class="o">(</span>string text, string wavOutPath<span class="o">)</span>
+<span class="o">{</span>
+    <span class="k">if</span> <span class="o">(</span>string.IsNullOrWhiteSpace<span class="o">(</span>text<span class="o">))</span>
+    <span class="o">{</span>
+        Console.WriteLine<span class="o">(</span><span class="s2">"[TTS] Empty text. Skipping Piper."</span><span class="o">)</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    var psi <span class="o">=</span> new ProcessStartInfo<span class="o">(</span>_exe<span class="o">)</span>
+    <span class="o">{</span>
+        RedirectStandardInput <span class="o">=</span> <span class="nb">true</span>,
+        RedirectStandardOutput <span class="o">=</span> <span class="nb">true</span>,
+        RedirectStandardError <span class="o">=</span> <span class="nb">true</span>,
+        UseShellExecute <span class="o">=</span> <span class="nb">false</span>
+    <span class="o">}</span><span class="p">;</span>
+
+    psi.ArgumentList.Add<span class="o">(</span><span class="s2">"-m"</span><span class="o">)</span><span class="p">;</span>
+    psi.ArgumentList.Add<span class="o">(</span>_modelPath<span class="o">)</span><span class="p">;</span>
+    psi.ArgumentList.Add<span class="o">(</span><span class="s2">"-f"</span><span class="o">)</span><span class="p">;</span>
+    psi.ArgumentList.Add<span class="o">(</span>wavOutPath<span class="o">)</span><span class="p">;</span>
+
+    using var proc <span class="o">=</span> Process.Start<span class="o">(</span>psi<span class="o">)</span><span class="p">;</span>
+    <span class="k">if</span> <span class="o">(</span>proc <span class="o">==</span> null<span class="o">)</span>
+        throw new InvalidOperationException<span class="o">(</span><span class="s2">"Failed to start Piper."</span><span class="o">)</span><span class="p">;</span>
+
+    await proc.StandardInput.WriteLineAsync<span class="o">(</span>text<span class="o">)</span><span class="p">;</span>
+    await proc.StandardInput.FlushAsync<span class="o">()</span><span class="p">;</span>
+    proc.StandardInput.Close<span class="o">()</span><span class="p">;</span>
+
+    var stderrTask <span class="o">=</span> proc.StandardError.ReadToEndAsync<span class="o">()</span><span class="p">;</span>
+    var stdoutTask <span class="o">=</span> proc.StandardOutput.ReadToEndAsync<span class="o">()</span><span class="p">;</span>
+
+    await proc.WaitForExitAsync<span class="o">()</span><span class="p">;</span>
+    var stderr <span class="o">=</span> await stderrTask<span class="p">;</span>
+    var stdout <span class="o">=</span> await stdoutTask<span class="p">;</span>
+
+    <span class="k">if</span> <span class="o">(</span>proc.ExitCode <span class="o">!=</span> 0<span class="o">)</span>
+    <span class="o">{</span>
+        throw new InvalidOperationException<span class="o">(</span>
+            <span class="s2">$"Piper exited with code {proc.ExitCode}.</span><span class="se">\n</span><span class="s2">STDERR:</span><span class="se">\n</span><span class="s2">{stderr}</span><span class="se">\n</span><span class="s2">STDOUT:</span><span class="se">\n</span><span class="s2">{stdout}"</span><span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h2 id="7-ollama-llm-client--prompting-strategy"><span class="me-2">7. Ollama LLM Client + Prompting Strategy</span><a href="#7-ollama-llm-client--prompting-strategy" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>Prompt constructed dynamically with system prompt + RAG context + child’s query.</p><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+32
+33
+34
+35
+36
+37
+38
+39
+40
+41
+42
+43
+44
+45
+46
+</pre><td class="rouge-code"><pre>public async Task&lt;string&gt; GenerateReplyAsync<span class="o">(</span>
+    string userText, 
+    string? context <span class="o">=</span> null,
+    CancellationToken ct <span class="o">=</span> default<span class="o">)</span>
+<span class="o">{</span>
+    var sb <span class="o">=</span> new StringBuilder<span class="o">()</span><span class="p">;</span>
+    sb.AppendLine<span class="o">(</span>_cfg.SystemPrompt<span class="o">)</span><span class="p">;</span>
+    sb.AppendLine<span class="o">()</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="o">(!</span>string.IsNullOrWhiteSpace<span class="o">(</span>context<span class="o">))</span>
+    <span class="o">{</span>
+        sb.AppendLine<span class="o">(</span><span class="s2">"Here are some passages from the Ramayana. Use them to answer:"</span><span class="o">)</span><span class="p">;</span>
+        sb.AppendLine<span class="o">(</span>context<span class="o">)</span><span class="p">;</span>
+        sb.AppendLine<span class="o">()</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    sb.AppendLine<span class="o">(</span><span class="s2">$"Child said: </span><span class="se">\"</span><span class="s2">{userText}</span><span class="se">\"</span><span class="s2">"</span><span class="o">)</span><span class="p">;</span>
+    sb.AppendLine<span class="o">()</span><span class="p">;</span>
+    sb.AppendLine<span class="o">(</span><span class="s2">"Answer in 3-4 simple sentences for a child."</span><span class="o">)</span><span class="p">;</span>
+
+    var reqObj <span class="o">=</span> new
+    <span class="o">{</span>
+        model <span class="o">=</span> _cfg.Model,
+        prompt <span class="o">=</span> sb.ToString<span class="o">()</span>,
+        stream <span class="o">=</span> <span class="nb">false</span>,
+        keep_alive <span class="o">=</span> 300
+    <span class="o">}</span><span class="p">;</span>
+
+    var json <span class="o">=</span> JsonSerializer.Serialize<span class="o">(</span>reqObj<span class="o">)</span><span class="p">;</span>
+    using var content <span class="o">=</span> new StringContent<span class="o">(</span>json, Encoding.UTF8, <span class="s2">"application/json"</span><span class="o">)</span><span class="p">;</span>
+    var url <span class="o">=</span> <span class="s2">$"{_cfg.BaseUrl.TrimEnd('/')}/api/generate"</span><span class="p">;</span>
+
+    HttpResponseMessage resp<span class="p">;</span>
+    try
+    <span class="o">{</span>
+        resp <span class="o">=</span> await Http.PostAsync<span class="o">(</span>url, content, ct<span class="o">)</span><span class="p">;</span>
+    <span class="o">}</span>
+    catch <span class="o">(</span>Exception ex<span class="o">)</span>
+    <span class="o">{</span>
+        Console.WriteLine<span class="o">(</span><span class="s2">$"[LLM] HTTP error: {ex.Message}"</span><span class="o">)</span><span class="p">;</span>
+        <span class="k">return </span>string.Empty<span class="p">;</span>
+    <span class="o">}</span>
+
+    var body <span class="o">=</span> await resp.Content.ReadAsStringAsync<span class="o">(</span>ct<span class="o">)</span><span class="p">;</span>
+    ...
+<span class="o">}</span>
+</pre></table></code></div></div><h2 id="8-ramayana-rag"><span class="me-2">8. Ramayana RAG</span><a href="#8-ramayana-rag" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>I wanted my child to hear stories and answers rooted in the Ramayana, not random internet style text. So I implemented a custom RAG pipeline in 2 parts:</p><ul><li>Indexer that runs once and creates a JSON index from the Ramayana PDF<li>Runtime service that looks up relevant chunks per question</ul><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+</pre><td class="rouge-code"><pre>using var doc <span class="o">=</span> PdfDocument.Open<span class="o">(</span>pdfPath<span class="o">)</span><span class="p">;</span>
+foreach <span class="o">(</span>Page page <span class="k">in </span>doc.GetPages<span class="o">())</span> <span class="o">{</span> ... <span class="o">}</span>
+
+//Chunking
+<span class="k">if</span> <span class="o">(</span>sb.Length <span class="o">&gt;=</span> chunkChars<span class="o">)</span>
+    chunks.Add<span class="o">(</span>new TextChunk <span class="o">{</span> Text <span class="o">=</span> sb.ToString<span class="o">()</span>.Trim<span class="o">()</span>, ... <span class="o">})</span><span class="p">;</span>
+
+//Embedding via Ollama:
+var req <span class="o">=</span> new <span class="o">{</span> model <span class="o">=</span> cfg.Rag.EmbeddingModel, input <span class="o">=</span> text <span class="o">}</span><span class="p">;</span>
+var resp <span class="o">=</span> await Http.PostAsync<span class="o">(</span>url, content, ct<span class="o">)</span><span class="p">;</span>
+</pre></table></code></div></div><p>Full index persisted as JSON to the disk. At runtime, RamayanaRagService loads the JSON index and handles all similarity search.</p><h2 id="9-kidbot-orchestration-layer"><span class="me-2">9. KidBot Orchestration Layer</span><a href="#9-kidbot-orchestration-layer" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>This is the glue that ties everything together.</p><ul><li>Wait for ENTER<li>Record audio<li>Transcribe<li>Run RAG<li>Generate LLM reply<li>Speak via Piper<li>Playback<li>Repeat</ul><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+</pre><td class="rouge-code"><pre>clipPath <span class="o">=</span> await AudioRecorder.RecordWavAsync<span class="o">(</span><span class="s2">"clip.wav"</span>, _config.Audio<span class="o">)</span><span class="p">;</span>
+text <span class="o">=</span> await _stt.TranscribeAsync<span class="o">(</span>clipPath<span class="o">)</span><span class="p">;</span>
+context <span class="o">=</span> await _rag.TryGetContextAsync<span class="o">(</span>text<span class="o">)</span><span class="p">;</span>
+reply <span class="o">=</span> await _llm.GenerateReplyAsync<span class="o">(</span>text, context<span class="o">)</span><span class="p">;</span>
+await _tts.SpeakAsync<span class="o">(</span>reply, <span class="s2">"reply.wav"</span><span class="o">)</span><span class="p">;</span>
+await AudioPlayer.PlayWavAsync<span class="o">(</span><span class="s2">"reply.wav"</span><span class="o">)</span><span class="p">;</span>
+</pre></table></code></div></div><h2 id="10-entry-point-and-modes"><span class="me-2">10. Entry point and modes</span><a href="#10-entry-point-and-modes" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><p>The Program class sets up dependency wiring and supports two modes out of the box:</p><ul><li>index - build or rebuild the Ramayana index<li>default - run the interactive voice bot</ul><div class="language-bash highlighter-rouge"><div class="code-header"> <span data-label-text="Shell"><i class="fas fa-code fa-fw small"></i></span> <button aria-label="copy" data-title-succeed="Copied!"><i class="far fa-clipboard"></i></button></div><div class="highlight"><code><table class="rouge-table"><tbody><tr><td class="rouge-gutter gl"><pre class="lineno">1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21
+22
+23
+24
+25
+26
+27
+28
+29
+30
+31
+</pre><td class="rouge-code"><pre>static async Task Main<span class="o">(</span>string[] args<span class="o">)</span>
+<span class="o">{</span>
+    var configurationRoot <span class="o">=</span> new ConfigurationBuilder<span class="o">()</span>
+        .SetBasePath<span class="o">(</span>Directory.GetCurrentDirectory<span class="o">())</span>
+        .AddJsonFile<span class="o">(</span><span class="s2">"appsettings.json"</span>, optional: <span class="nb">false</span><span class="o">)</span>
+        .Build<span class="o">()</span><span class="p">;</span>
+
+    var config <span class="o">=</span> configurationRoot.Get&lt;Config&gt;<span class="o">()</span>
+                 ?? throw new InvalidOperationException<span class="o">(</span><span class="s2">"Failed to bind appsettings.json to Config."</span><span class="o">)</span><span class="p">;</span>
+
+    // Index mode
+    <span class="k">if</span> <span class="o">(</span>args.Length <span class="o">&gt;</span> 0 <span class="o">&amp;&amp;</span> args[0].Equals<span class="o">(</span><span class="s2">"index"</span>, StringComparison.OrdinalIgnoreCase<span class="o">))</span>
+    <span class="o">{</span>
+        Console.WriteLine<span class="o">(</span><span class="s2">"Running Ramayana indexer..."</span><span class="o">)</span><span class="p">;</span>
+        await RamayanaIndexer.BuildIndexAsync<span class="o">(</span>config<span class="o">)</span><span class="p">;</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="o">}</span>
+
+    Console.WriteLine<span class="o">(</span><span class="s2">"Starting Whisper (STT)..."</span><span class="o">)</span><span class="p">;</span>
+    await using var whisper <span class="o">=</span> new WhisperTranscriber<span class="o">(</span>config.Models.WhisperPath<span class="o">)</span><span class="p">;</span>
+
+    Console.WriteLine<span class="o">(</span><span class="s2">"Starting Ollama client..."</span><span class="o">)</span><span class="p">;</span>
+    using var llm <span class="o">=</span> new OllamaClient<span class="o">(</span>config.Ollama<span class="o">)</span><span class="p">;</span>
+
+    Console.WriteLine<span class="o">(</span><span class="s2">"Starting Piper (TTS)..."</span><span class="o">)</span><span class="p">;</span>
+    var tts <span class="o">=</span> new PiperSpeaker<span class="o">(</span>config.Models<span class="o">)</span><span class="p">;</span>
+
+    var rag <span class="o">=</span> new RamayanaRagService<span class="o">(</span>config<span class="o">)</span><span class="p">;</span>
+    var bot <span class="o">=</span> new KidBot<span class="o">(</span>config, whisper, llm, tts, rag<span class="o">)</span><span class="p">;</span>
+    await bot.RunAsync<span class="o">()</span><span class="p">;</span>
+<span class="o">}</span>
+</pre></table></code></div></div><h2 id="whats-next-roadmap"><span class="me-2">What’s Next (Roadmap)</span><a href="#whats-next-roadmap" class="anchor text-muted"><i class="fas fa-hashtag"></i></a></h2><ul><li>Always-on wake word (“Hey Rama”)<li>Voice activity detection + barge-in during TTS<li>Session memory per conversation<li>Safer guardrails using LlamaGuard<li>Semantic and optimized embeddings (e5-large or bge-small)<li>Better latency using quantized TTS/LLM models</ul></div><div class="post-tail-wrapper text-muted"><div class="post-tags"> <i class="fa fa-tags fa-fw me-1"></i> <a href="/tags/raspberry-pi/" class="post-tag no-text-decoration" >Raspberry Pi</a> <a href="/tags/hat/" class="post-tag no-text-decoration" >HAT</a> <a href="/tags/nvme-ssd/" class="post-tag no-text-decoration" >NVMe SSD</a></div><div class=" post-tail-bottom d-flex justify-content-between align-items-center mt-5 pb-2 " ><div class="license-wrapper"> This post is licensed under <a href="https://creativecommons.org/licenses/by/4.0/"> CC BY 4.0 </a> by the author.</div><div class="share-wrapper d-flex align-items-center"> <span class="share-label text-muted">Share</span> <span class="share-icons"> <a href="https://twitter.com/intent/tweet?text=A%20working%20raspberry%20pi%20voice%20chat%20bot%20version%201%20-%20Ujwal%20Iyer&url=https%3A%2F%2Fujwaliyer.com%2Fposts%2FVoiceChatbot-v1%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Twitter" aria-label="Twitter"> <i class="fa-fw fa-brands fa-square-x-twitter"></i> </a> <a href="https://www.facebook.com/sharer/sharer.php?title=A%20working%20raspberry%20pi%20voice%20chat%20bot%20version%201%20-%20Ujwal%20Iyer&u=https%3A%2F%2Fujwaliyer.com%2Fposts%2FVoiceChatbot-v1%2F" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Facebook" aria-label="Facebook"> <i class="fa-fw fab fa-facebook-square"></i> </a> <a href="https://t.me/share/url?url=https%3A%2F%2Fujwaliyer.com%2Fposts%2FVoiceChatbot-v1%2F&text=A%20working%20raspberry%20pi%20voice%20chat%20bot%20version%201%20-%20Ujwal%20Iyer" target="_blank" rel="noopener" data-bs-toggle="tooltip" data-bs-placement="top" title="Telegram" aria-label="Telegram"> <i class="fa-fw fab fa-telegram"></i> </a> <button id="copy-link" aria-label="Copy link" class="btn small" data-bs-toggle="tooltip" data-bs-placement="top" title="Copy link" data-title-succeed="Link copied successfully!" > <i class="fa-fw fas fa-link pe-none fs-6"></i> </button> </span></div></div></div></article></main><aside aria-label="Panel" id="panel-wrapper" class="col-xl-3 ps-2 text-muted"><div class="access"><section id="access-lastmod"><h2 class="panel-heading">Recently Updated</h2><ul class="content list-unstyled ps-0 pb-1 ms-1 mt-2"><li class="text-truncate lh-lg"> <a href="/posts/VoiceChatbot-v1/">A working raspberry pi voice chat bot version 1</a><li class="text-truncate lh-lg"> <a href="/posts/ToddlerPersonaResearch-AI-Solutions/">Unpacking toddler persona & AI-ML solutions for an AI Voice Bot</a><li class="text-truncate lh-lg"> <a href="/posts/RaspberryPi-Setup/">Setup Raspberry Pi 5 16GB from scratch</a><li class="text-truncate lh-lg"> <a href="/posts/HeyRama-buildingVoiceBot/">Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5</a><li class="text-truncate lh-lg"> <a href="/posts/AI-For-Kids/">Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption</a></ul></section><section><h2 class="panel-heading">Trending Tags</h2><div class="d-flex flex-wrap mt-3 mb-1 me-3"> <a class="post-tag btn btn-outline-primary" href="/tags/raspberry-pi/">Raspberry Pi</a> <a class="post-tag btn btn-outline-primary" href="/tags/rag/">RAG</a> <a class="post-tag btn btn-outline-primary" href="/tags/ai/">AI</a> <a class="post-tag btn btn-outline-primary" href="/tags/edge-ai/">Edge AI</a> <a class="post-tag btn btn-outline-primary" href="/tags/hat/">HAT</a> <a class="post-tag btn btn-outline-primary" href="/tags/langchain/">LangChain</a> <a class="post-tag btn btn-outline-primary" href="/tags/llm/">LLM</a> <a class="post-tag btn btn-outline-primary" href="/tags/nvme-ssd/">NVMe SSD</a> <a class="post-tag btn btn-outline-primary" href="/tags/ollama/">Ollama</a> <a class="post-tag btn btn-outline-primary" href="/tags/product-management/">Product Management</a></div></section></div><div class="toc-border-cover z-3"></div><section id="toc-wrapper" class="invisible position-sticky ps-0 pe-4 pb-4"><h2 class="panel-heading ps-3 pb-2 mb-0">Contents</h2><nav id="toc"></nav></section></aside></div><div class="row"><div id="tail-wrapper" class="col-12 col-lg-11 col-xl-9 px-md-4"><aside id="related-posts" aria-labelledby="related-label"><h3 class="mb-4" id="related-label">Further Reading</h3><nav class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4 mb-4"><article class="col"> <a href="/posts/RaspberryPi-Setup/" class="post-preview card h-100"><div class="card-body"> <time data-ts="1762194600" data-df="ll" > Nov 4, 2025 </time><h4 class="pt-0 my-2">Setup Raspberry Pi 5 16GB from scratch</h4><div class="text-muted"><p>Setup Raspberry Pi5 16 GB, with M.2 HAT+ 256GB SSD Kit, active Cooler with heat sink- and finally install OS on the assembled Pi.</p></div></div></a></article><article class="col"> <a href="/posts/HeyRama-buildingVoiceBot/" class="post-preview card h-100"><div class="card-body"> <time data-ts="1762021800" data-df="ll" > Nov 2, 2025 </time><h4 class="pt-0 my-2">Hey Rama: Building a Voice-First Offline Learning Companion on Raspberry Pi 5</h4><div class="text-muted"><p>A complete roadmap and offline AI framework guide to build 'Hey Rama' - a private, voice-based learning system for children using Raspberry Pi 5, Ollama, Qdrant, and LangChain.</p></div></div></a></article><article class="col"> <a href="/posts/AI-For-Kids/" class="post-preview card h-100"><div class="card-body"> <time data-ts="1761849000" data-df="ll" > Oct 31, 2025 </time><h4 class="pt-0 my-2">Building AI for My 5-Year-Old: Designing Curiosity, Not Consumption</h4><div class="text-muted"><p>How a Dad, who's a Product Manager is learning AI hands-on by building a safe, voice-only LLM companion for his child - blending parenting, product thinking, and technology.</p></div></div></a></article></nav></aside><nav class="post-navigation d-flex justify-content-between" aria-label="Post Navigation"> <a href="/posts/ToddlerPersonaResearch-AI-Solutions/" class="btn btn-outline-primary" aria-label="Older" ><p>Unpacking toddler persona & AI-ML solutions for an AI Voice Bot</p></a><div class="btn btn-outline-primary disabled" aria-label="Newer"><p>-</p></div></nav><footer aria-label="Site Info" class=" d-flex flex-column justify-content-center text-muted flex-lg-row justify-content-lg-between align-items-lg-center pb-lg-3 " ><p>© <time>2025</time> <a href="https://www.linkedin.com/in/ujwaliyer/">Ujwal Iyer</a>. <span data-bs-toggle="tooltip" data-bs-placement="top" title="Except where otherwise noted, the blog posts on this site are licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0) License by the author." >Some rights reserved.</span></p><p>Using the <a data-bs-toggle="tooltip" data-bs-placement="top" title="v7.4.1" href="https://github.com/cotes2020/jekyll-theme-chirpy" target="_blank" rel="noopener" >Chirpy</a> theme for <a href="https://jekyllrb.com" target="_blank" rel="noopener">Jekyll</a>.</p></footer></div></div><div id="search-result-wrapper" class="d-flex justify-content-center d-none"><div class="col-11 content"><div id="search-hints"><section><h2 class="panel-heading">Trending Tags</h2><div class="d-flex flex-wrap mt-3 mb-1 me-3"> <a class="post-tag btn btn-outline-primary" href="/tags/raspberry-pi/">Raspberry Pi</a> <a class="post-tag btn btn-outline-primary" href="/tags/rag/">RAG</a> <a class="post-tag btn btn-outline-primary" href="/tags/ai/">AI</a> <a class="post-tag btn btn-outline-primary" href="/tags/edge-ai/">Edge AI</a> <a class="post-tag btn btn-outline-primary" href="/tags/hat/">HAT</a> <a class="post-tag btn btn-outline-primary" href="/tags/langchain/">LangChain</a> <a class="post-tag btn btn-outline-primary" href="/tags/llm/">LLM</a> <a class="post-tag btn btn-outline-primary" href="/tags/nvme-ssd/">NVMe SSD</a> <a class="post-tag btn btn-outline-primary" href="/tags/ollama/">Ollama</a> <a class="post-tag btn btn-outline-primary" href="/tags/product-management/">Product Management</a></div></section></div><div id="search-results" class="d-flex flex-wrap justify-content-center text-muted mt-3"></div></div></div></div><aside aria-label="Scroll to Top"> <button id="back-to-top" type="button" class="btn btn-lg btn-box-shadow"> <i class="fas fa-angle-up"></i> </button></aside></div><div id="mask" class="d-none position-fixed w-100 h-100 z-1"></div><aside id="notification" class="toast" role="alert" aria-live="assertive" aria-atomic="true" data-bs-animation="true" data-bs-autohide="false" ><div class="toast-header"> <button type="button" class="btn-close ms-auto" data-bs-dismiss="toast" aria-label="Close" ></button></div><div class="toast-body text-center pt-0"><p class="px-2 mb-3">A new version of content is available.</p><button type="button" class="btn btn-primary" aria-label="Update"> Update </button></div></aside><script> document.addEventListener('DOMContentLoaded', () => { SimpleJekyllSearch({ searchInput: document.getElementById('search-input'), resultsContainer: document.getElementById('search-results'), json: '/assets/js/data/search.json', searchResultTemplate: '<article class="px-1 px-sm-2 px-lg-4 px-xl-0"><header><h2><a href="{url}">{title}</a></h2><div class="post-meta d-flex flex-column flex-sm-row text-muted mt-1 mb-1"> {categories} {tags}</div></header><p>{content}</p></article>', noResultsText: '<p class="mt-5">Oops! No results found.</p>', templateMiddleware: function(prop, value, template) { if (prop === 'categories') { if (value === '') { return `${value}`; } else { return `<div class="me-sm-4"><i class="far fa-folder fa-fw"></i>${value}</div>`; } } if (prop === 'tags') { if (value === '') { return `${value}`; } else { return `<div><i class="fa fa-tag fa-fw"></i>${value}</div>`; } } } }); }); </script>
