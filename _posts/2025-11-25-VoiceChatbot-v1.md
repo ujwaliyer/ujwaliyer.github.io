@@ -1,7 +1,6 @@
 ---
 title: "A working raspberry pi voice chat bot version 1"
 date: 2025-11-25
-author: Ujwal Iyer
 tags: [Raspberry Pi, HAT,  NVMe SSD]
 description: "First version of a working and offline voice bot"
 
@@ -14,8 +13,7 @@ This post walks through the full system I built:
 - The Ramayana RAG pipeline
 - Key C# snippets that glue everything together
 
-
-{% include youtube.html id="bkTHjwxW17Y" title="Hey Rama Demo v1" %}
+{% include youtube.html id="-Sa_ptuP4ps" title="Hey Rama Demo v1" %}
 
 
 ## 1. What this bot actually does
@@ -328,7 +326,7 @@ public async Task<string> GenerateReplyAsync(
 
 ## 8. Ramayana RAG
 
-I wanted my child to hear stories and answers rooted in the Ramayana, not random internet style text. So I implemented a custom RAG pipeline in 2 parts:
+I wanted my child to hear stories and answers rooted in the Ramayana (retelling by C Rajagopalachari), not random internet style text. So I implemented a custom RAG pipeline in 2 parts:
 * Indexer that runs once and creates a JSON index from the Ramayana PDF
 * Runtime service that looks up relevant chunks per question
 
@@ -408,11 +406,25 @@ static async Task Main(string[] args)
 }
 ```
 
-## What’s Next (Roadmap)
+## 11. What’s Next (Roadmap)
 
-* Always-on wake word ("Hey Rama")
-* Voice activity detection + barge-in during TTS
+### Audio layer
+* Add VAD (voice activity detection) to stop recording once silence is detected. This directly reduces Whisper processing time.
+* Instead of writing audio to disk and reading again, capture into memory
+* Add wake word ("Hey Rama")
+* Keep Piper process warm- reduce per process startup cost
+
+### Embeddings
+* Better quality chunking: Right now it’s fixed character chunking. Upgrade to semantic chunking with overlap using Qdrant
+
+### LLM
+* Limit tokens generated (num_predict)
+* Shorter system prompt + context: Keep system prompt extremely tight and trim from topk from 5 to 2. 
+* Ollama is loading/unloading the model each time: Add "keep_alive": 300 to ensure the model is kept warm between queries.
+
+### Product Experience
 * Session memory per conversation
 * Safer guardrails using LlamaGuard
-* Semantic and optimized embeddings (e5-large or bge-small)
-* Better latency using quantized TTS/LLM models
+* Add more RAG content- mahabharata, story teller, math, nature, space, etc
+* Add Agentic RAG layer using Microsoft Semantic Kernel, so requests are directly matched with the right collections in Qdrant
+* Graceful degradation- if RAG context is null, have a fallback answer
