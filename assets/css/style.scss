@@ -1,12 +1,14 @@
-.video {
+.video-wide {
+  width: 100vw;
   position: relative;
-  padding-top: 56.25%; /* 16:9 */
-  height: 0;
-  overflow: hidden;
+  left: calc(-50vw + 50%);
+  padding-top: 56.25%; /* 16:9 ratio */
+  margin: 2rem 0;
   border-radius: 12px;
+  overflow: hidden;
 }
 
-.video iframe {
+.video-wide iframe {
   position: absolute;
   top: 0;
   left: 0;
