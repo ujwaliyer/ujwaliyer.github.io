@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-25T23:44:06+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">A working raspberry pi voice chat bot version 1</title><link href="https://ujwaliyer.com/posts/VoiceChatbot-v1/" rel="alternate" type="text/html" title="A working raspberry pi voice chat bot version 1" /><published>2025-11-25T00:00:00+05:30</published><updated>2025-11-25T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/VoiceChatbot-v1</id><content type="html" xml:base="https://ujwaliyer.com/posts/VoiceChatbot-v1/"><![CDATA[<p>This post walks through the full system I built:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-26T00:05:10+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">A working raspberry pi voice chat bot version 1</title><link href="https://ujwaliyer.com/posts/VoiceChatbot-v1/" rel="alternate" type="text/html" title="A working raspberry pi voice chat bot version 1" /><published>2025-11-25T00:00:00+05:30</published><updated>2025-11-25T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/VoiceChatbot-v1</id><content type="html" xml:base="https://ujwaliyer.com/posts/VoiceChatbot-v1/"><![CDATA[<p>This post walks through the full system I built:</p>
 <ul>
   <li>Architecture</li>
   <li>Libraries and tools</li>
@@ -556,7 +556,7 @@
 
 <h2 id="8-ramayana-rag">8. Ramayana RAG</h2>
 
-<p>I wanted my child to hear stories and answers rooted in the Ramayana, not random internet style text. So I implemented a custom RAG pipeline in 2 parts:</p>
+<p>I wanted my child to hear stories and answers rooted in the Ramayana (retelling by C Rajagopalachari), not random internet style text. So I implemented a custom RAG pipeline in 2 parts:</p>
 <ul>
   <li>Indexer that runs once and creates a JSON index from the Ramayana PDF</li>
   <li>Runtime service that looks up relevant chunks per question</li>
@@ -686,16 +686,36 @@ await AudioPlayer.PlayWavAsync<span class="o">(</span><span class="s2">"reply.wa
 <span class="o">}</span>
 </pre></td></tr></tbody></table></code></pre></div></div>
 
-<h2 id="whats-next-roadmap">What’s Next (Roadmap)</h2>
+<h2 id="11-whats-next-roadmap">11. What’s Next (Roadmap)</h2>
 
+<h3 id="audio-layer">Audio layer</h3>
 <ul>
-  <li>Always-on wake word (“Hey Rama”)</li>
-  <li>Voice activity detection + barge-in during TTS</li>
+  <li>Add VAD (voice activity detection) to stop recording once silence is detected. This directly reduces Whisper processing time.</li>
+  <li>Instead of writing audio to disk and reading again, capture into memory</li>
+  <li>Add wake word (“Hey Rama”)</li>
+  <li>Keep Piper process warm- reduce per process startup cost</li>
+</ul>
+
+<h3 id="embeddings">Embeddings</h3>
+<ul>
+  <li>Better quality chunking: Right now it’s fixed character chunking. Upgrade to semantic chunking with overlap using Qdrant</li>
+</ul>
+
+<h3 id="llm">LLM</h3>
+<ul>
+  <li>Limit tokens generated (num_predict)</li>
+  <li>Shorter system prompt + context: Keep system prompt extremely tight and trim from topk from 5 to 2.</li>
+  <li>Ollama is loading/unloading the model each time: Add “keep_alive”: 300 to ensure the model is kept warm between queries.</li>
+</ul>
+
+<h3 id="product-experience">Product Experience</h3>
+<ul>
   <li>Session memory per conversation</li>
   <li>Safer guardrails using LlamaGuard</li>
-  <li>Semantic and optimized embeddings (e5-large or bge-small)</li>
-  <li>Better latency using quantized TTS/LLM models</li>
-</ul>]]></content><author><name>Ujwal Iyer</name></author><category term="Raspberry Pi" /><category term="HAT" /><category term="NVMe SSD" /><summary type="html"><![CDATA[First version of a working and offline voice bot]]></summary></entry><entry><title type="html">Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot</title><link href="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/" rel="alternate" type="text/html" title="Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot" /><published>2025-11-06T00:00:00+05:30</published><updated>2025-11-06T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions</id><content type="html" xml:base="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/"><![CDATA[<p>As a Senior Product Manager, I’ve spent years obsessing over user personas, friction points, and success metrics. But nothing prepared me for my newest and toughest customer: my five-year-old toddler.</p>
+  <li>Add more RAG content- mahabharata, story teller, math, nature, space, etc</li>
+  <li>Add Agentic RAG layer using Microsoft Semantic Kernel, so requests are directly matched with the right collections in Qdrant</li>
+  <li>Graceful degradation- if RAG context is null, have a fallback answer</li>
+</ul>]]></content><author><name></name></author><category term="Raspberry Pi" /><category term="HAT" /><category term="NVMe SSD" /><summary type="html"><![CDATA[First version of a working and offline voice bot]]></summary></entry><entry><title type="html">Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot</title><link href="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/" rel="alternate" type="text/html" title="Unpacking toddler persona &amp;amp; AI-ML solutions for an AI Voice Bot" /><published>2025-11-06T00:00:00+05:30</published><updated>2025-11-06T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions</id><content type="html" xml:base="https://ujwaliyer.com/posts/ToddlerPersonaResearch-AI-Solutions/"><![CDATA[<p>As a Senior Product Manager, I’ve spent years obsessing over user personas, friction points, and success metrics. But nothing prepared me for my newest and toughest customer: my five-year-old toddler.</p>
 
 <p>He doesn’t just ask questions. He fires rapid, chaotic queries at bedtime.<br />
 “Appa, why Rama go to forest?” (where to start- because his Dasharatha told him so, or because he promised Kaikeyi that he will grant her boon when the time came?)
