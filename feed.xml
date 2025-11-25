@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-26T00:05:10+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">A working raspberry pi voice chat bot version 1</title><link href="https://ujwaliyer.com/posts/VoiceChatbot-v1/" rel="alternate" type="text/html" title="A working raspberry pi voice chat bot version 1" /><published>2025-11-25T00:00:00+05:30</published><updated>2025-11-25T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/VoiceChatbot-v1</id><content type="html" xml:base="https://ujwaliyer.com/posts/VoiceChatbot-v1/"><![CDATA[<p>This post walks through the full system I built:</p>
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en"><generator uri="https://jekyllrb.com/" version="4.4.1">Jekyll</generator><link href="https://ujwaliyer.com/feed.xml" rel="self" type="application/atom+xml" /><link href="https://ujwaliyer.com/" rel="alternate" type="text/html" hreflang="en" /><updated>2025-11-26T00:15:59+05:30</updated><id>https://ujwaliyer.com/feed.xml</id><title type="html">Ujwal Iyer</title><subtitle>Learnings, Experiments &amp; Notes.</subtitle><entry><title type="html">A working raspberry pi voice chat bot version 1</title><link href="https://ujwaliyer.com/posts/VoiceChatbot-v1/" rel="alternate" type="text/html" title="A working raspberry pi voice chat bot version 1" /><published>2025-11-25T00:00:00+05:30</published><updated>2025-11-25T00:00:00+05:30</updated><id>https://ujwaliyer.com/posts/VoiceChatbot-v1</id><content type="html" xml:base="https://ujwaliyer.com/posts/VoiceChatbot-v1/"><![CDATA[<p>This post walks through the full system I built:</p>
 <ul>
   <li>Architecture</li>
   <li>Libraries and tools</li>
@@ -8,7 +8,7 @@
 </ul>
 
 <div class="video-wide">
-  <iframe src="https://www.youtube-nocookie.com/embed/bkTHjwxW17Y?rel=0&amp;modestbranding=1" title="Hey Rama Demo v1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy">
+  <iframe src="https://www.youtube-nocookie.com/embed/-Sa_ptuP4ps?rel=0&amp;modestbranding=1" title="Hey Rama Demo v1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen="" loading="lazy">
   </iframe>
 </div>
 
